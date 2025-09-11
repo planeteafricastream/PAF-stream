@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogue | PAF Stream</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background-color: #111;
+    }
+    header img {
+      height: 45px;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #e50914;
+    }
+    .catalogue {
+      padding: 20px;
+    }
+    .catalogue h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+    }
+    .film {
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .film:hover {
+      transform: scale(1.05);
+    }
+    .film img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .film-title {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 4px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="images/logo.png" alt="PAF Stream Logo"></a>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="publier.html">Publier</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="catalogue">
+    <h1>Catalogue des films & séries</h1>
+    <div class="grid">
+      <div class="film">
+        <img src="images/film1.jpg" alt="Film 1">
+        <div class="film-title">Film 1</div>
+      </div>
+      <div class="film">
+        <img src="images/film2.jpg" alt="Film 2">
+        <div class="film-title">Film 2</div>
+      </div>
+      <div class="film">
+        <img src="images/film3.jpg" alt="Film 3">
+        <div class="film-title">Film 3</div>
+      </div>
+      <div class="film">
+        <img src="images/film4.jpg" alt="Film 4">
+        <div class="film-title">Film 4</div>
+      </div>
+      <div class="film">
+        <img src="images/film5.jpg" alt="Film 5">
+        <div class="film-title">Film 5</div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
