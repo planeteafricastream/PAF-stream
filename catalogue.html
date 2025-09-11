@@ -40,12 +40,14 @@
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
     }
     .film {
-      position: relative;
-      cursor: pointer;
+      background: #111;
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
       transition: transform 0.3s ease;
     }
     .film:hover {
@@ -53,17 +55,27 @@
     }
     .film img {
       width: 100%;
-      border-radius: 8px;
+      display: block;
     }
     .film-title {
-      position: absolute;
-      bottom: 8px;
-      left: 8px;
+      padding: 10px 0 5px;
       font-size: 14px;
       font-weight: bold;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 4px 6px;
+    }
+    .film button {
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      background-color: #e50914;
+      color: #fff;
+      border: none;
       border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .film button:hover {
+      background-color: #b20710;
     }
   </style>
 </head>
@@ -84,22 +96,27 @@
       <div class="film">
         <img src="images/film1.jpg" alt="Film 1">
         <div class="film-title">Film 1</div>
+        <button>Accéder (Payant)</button>
       </div>
       <div class="film">
         <img src="images/film2.jpg" alt="Film 2">
         <div class="film-title">Film 2</div>
+        <button>Accéder (Payant)</button>
       </div>
       <div class="film">
         <img src="images/film3.jpg" alt="Film 3">
         <div class="film-title">Film 3</div>
+        <button>Accéder (Payant)</button>
       </div>
       <div class="film">
         <img src="images/film4.jpg" alt="Film 4">
         <div class="film-title">Film 4</div>
+        <button>Accéder (Payant)</button>
       </div>
       <div class="film">
         <img src="images/film5.jpg" alt="Film 5">
         <div class="film-title">Film 5</div>
+        <button>Accéder (Payant)</button>
       </div>
     </div>
   </section>
