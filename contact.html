@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | PAF Stream</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background-color: #111;
+    }
+    header img {
+      height: 45px;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #e50914;
+    }
+    .contact-section {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+    .contact-section h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .contact-info {
+      margin: 30px 0;
+    }
+    .contact-info a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 20px;
+      background-color: #e50914;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .contact-info a:hover {
+      background-color: #b20710;
+    }
+    form {
+      margin-top: 40px;
+      text-align: left;
+      background: #111;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+    form label {
+      display: block;
+      margin-top: 15px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    form button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #e50914;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    form button:hover {
+      background-color: #b20710;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="logo.png" alt="PAF Stream Logo"></a>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="publier.html">Publier</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="contact-section">
+    <h1>Contactez-nous</h1>
+    <p>Une question ? Un partenariat ? Un projet à publier ?</p>
+
+    <div class="contact-info">
+      <a href="https://wa.me/237689325213" target="_blank">📱 WhatsApp : +237 689 325 213</a>
+      <a href="mailto:planeteafricastream@gmail.com">📧 Email : planeteafricastream@gmail.com</a>
+    </div>
+
+    <form action="#" method="post">
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" name="nom" placeholder="Votre nom complet" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Votre adresse email" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+</body>
+</html>
