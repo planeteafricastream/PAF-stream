@@ -94,6 +94,91 @@
   </header>
 
   <section class="pricing">
+    <!-- Abonnement 7 jours -->
+    <div class="plan">
+      <h2>Accès 7 jours</h2>
+      <p>Profitez de tous les films, séries et musiques pendant 7 jours.</p>
+      <strong>5000 FCFA</strong><br><br>
+      <button onclick="alert('Lien de paiement pour abonnement 7 jours')">S'abonner</button>
+    </div>
+
+    <!-- Abonnement 1 mois -->
+    <div class="plan">
+      <h2>Accès 1 mois</h2>
+      <p>Accès complet à tous les films, séries et musiques pendant 30 jours.</p>
+      <strong>10000 FCFA</strong><br><br>
+      <button onclick="alert('Lien de paiement pour abonnement 1 mois')">S'abonner</button>
+    </div>
+
+    <!-- Achat par contenu -->
+    <div class="plan">
+      <h2>Achat par contenu</h2>
+      <p>Payez uniquement pour le film, la série ou la musique de votre choix.</p>
+      <strong>À partir de 2000 FCFA</strong><br><br>
+      <button onclick="alert('Choisissez un contenu dans le catalogue pour voir son prix')">Voir les contenus</button>
+    </div>
+  </section>
+</body>
+</html>      align-items: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 60px 20px;
+    }
+    .plan {
+      background: #111;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      width: 280px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+      transition: transform 0.3s;
+    }
+    .plan:hover {
+      transform: scale(1.05);
+    }
+    .plan h2 {
+      font-size: 24px;
+      color: #e50914;
+      margin-bottom: 15px;
+    }
+    .plan p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .plan strong {
+      font-size: 20px;
+      color: #fff;
+    }
+    .plan button {
+      padding: 12px 20px;
+      background-color: #e50914;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .plan button:hover {
+      background-color: #b20710;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="logo.png" alt="PAF Stream Logo"></a>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="publier.html">Publier</a>
+      <a href="abonnement.html">Abonnement</a>
+      <a href="contact.html">Contact</a>
+      <a href="apropos.html">À propos</a>
+    </nav>
+  </header>
+
+  <section class="pricing">
     <div class="plan">
       <h2>Accès 7 jours</h2>
       <p>Profitez de tous les films et séries pendant 7 jours.</p>
