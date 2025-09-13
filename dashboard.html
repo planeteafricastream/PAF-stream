@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de Bord | PAF Stream</title>
+  <style>
+    /* STYLE GLOBAL */
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+      display: flex;
+    }
+
+    /* MENU LATERAL */
+    .sidebar {
+      width: 240px;
+      height: 100vh;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transition: transform 0.3s ease;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #e50914;
+    }
+    .sidebar a {
+      padding: 15px 25px;
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover {
+      background: #e50914;
+    }
+
+    /* CONTENU PRINCIPAL */
+    .main-content {
+      margin-left: 240px;
+      padding: 30px;
+      width: calc(100% - 240px);
+      transition: margin-left 0.3s ease;
+    }
+    .main-content h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #e50914;
+    }
+
+    /* CARDS STATISTIQUES */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 8px rgba(255,255,255,0.05);
+    }
+    .card h3 {
+      margin: 10px 0;
+      font-size: 20px;
+    }
+    .card p {
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    /* TABLEAU DES VIDEOS */
+    .table-section {
+      margin-top: 40px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      min-width: 600px;
+    }
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #333;
+    }
+    th {
+      background: #111;
+      color: #e50914;
+    }
+    tr:hover {
+      background: #222;
+    }
+    .actions button {
+      margin-right: 8px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .edit {
+      background: #007bff;
+      color: #fff;
+    }
+    .delete {
+      background: #e50914;
+      color: #fff;
+    }
+
+    /* BOUTON BURGER (MOBILE) */
+    .burger {
+      display: none;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 26px;
+      cursor: pointer;
+      z-index: 1000;
+      background: #111;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      .main-content {
+        margin-left: 0;
+        width: 100%;
+      }
+      .burger {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- BOUTON BURGER -->
+  <button class="burger" onclick="toggleMenu()">☰</button>
+
+  <!-- MENU LATERAL -->
+  <div class="sidebar" id="sidebar">
+    <h2>PAF Stream</h2>
+    <a href="#">📊 Tableau de bord</a>
+    <a href="#">🎬 Mes vidéos</a>
+    <a href="#">💰 Mes revenus</a>
+    <a href="#">⚙️ Paramètres</a>
+    <a href="#">🚪 Déconnexion</a>
+  </div>
+
+  <!-- CONTENU PRINCIPAL -->
+  <div class="main-content">
+    <h1>Bienvenue, Producteur</h1>
+
+    <!-- CARDS -->
+    <div class="cards">
+      <div class="card">
+        <h3>1 250</h3>
+        <p>Total des vues</p>
+      </div>
+      <div class="card">
+        <h3>45 000 FCFA</h3>
+        <p>Revenus cumulés</p>
+      </div>
+      <div class="card">
+        <h3>12</h3>
+        <p>Vidéos publiées</p>
+      </div>
+    </div>
+
+    <!-- TABLEAU DES VIDEOS -->
+    <div class="table-section">
+      <h2>Mes vidéos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Vues</th>
+            <th>Prix</th>
+            <th>Revenus</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Film A</td>
+            <td>500</td>
+            <td>2000 FCFA</td>
+            <td>1 000 000 FCFA</td>
+            <td class="actions">
+              <button class="edit">Modifier</button>
+              <button class="delete">Supprimer</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Série B</td>
+            <td>320</td>
+            <td>1000 FCFA</td>
+            <td>320 000 FCFA</td>
+            <td class="actions">
+              <button class="edit">Modifier</button>
+              <button class="delete">Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
