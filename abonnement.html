@@ -18,26 +18,59 @@
       justify-content: space-between;
       padding: 15px 30px;
       background-color: #111;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
     }
     header img {
-      height: 45px;
+      height: 40px;
+    }
+    .menu-btn {
+      display: block;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+    }
+    .menu-btn span {
+      display: block;
+      height: 4px;
+      background: #fff;
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background: #111;
+      padding-top: 60px;
+      transition: 0.4s;
     }
     nav a {
-      margin: 0 15px;
+      display: block;
       color: #fff;
       text-decoration: none;
+      padding: 15px 20px;
       font-weight: bold;
     }
     nav a:hover {
-      color: #e50914;
+      background: #e50914;
     }
+    nav.active {
+      right: 0;
+    }
+
     .pricing {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
       gap: 30px;
-      padding: 60px 20px;
+      padding: 120px 20px 60px;
     }
     .plan {
       background: #111;
@@ -45,7 +78,7 @@
       border-radius: 10px;
       text-align: center;
       width: 280px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
       transition: transform 0.3s;
     }
     .plan:hover {
@@ -81,117 +114,58 @@
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
     <a href="index.html"><img src="logo.png" alt="PAF Stream Logo"></a>
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="catalogue.html">Catalogue</a>
-      <a href="publier.html">Publier</a>
-      <a href="abonnement.html">Abonnement</a>
-      <a href="contact.html">Contact</a>
-      <a href="apropos.html">À propos</a>
-    </nav>
+    <div class="menu-btn" onclick="document.querySelector('nav').classList.toggle('active')">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </header>
 
+  <!-- Menu navigation -->
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="catalogue.html">Catalogue</a>
+    <a href="abonnement.html">Abonnement</a>
+    <a href="contact.html">Contact</a>
+    <a href="apropos.html">À propos</a>
+  </nav>
+
+  <!-- Section Abonnements -->
   <section class="pricing">
-    <!-- Abonnement 7 jours -->
     <div class="plan">
       <h2>Accès 7 jours</h2>
       <p>Profitez de tous les films, séries et musiques pendant 7 jours.</p>
       <strong>5000 FCFA</strong><br><br>
-      <button onclick="alert('Lien de paiement pour abonnement 7 jours')">S'abonner</button>
+      <button onclick="alert('Paiement 7 jours - bientôt dispo via Orange Money / MTN / Carte bancaire')">S'abonner</button>
     </div>
 
-    <!-- Abonnement 1 mois -->
     <div class="plan">
       <h2>Accès 1 mois</h2>
-      <p>Accès complet à tous les films, séries et musiques pendant 30 jours.</p>
+      <p>Streaming illimité sur tout le catalogue pendant 30 jours.</p>
       <strong>10000 FCFA</strong><br><br>
-      <button onclick="alert('Lien de paiement pour abonnement 1 mois')">S'abonner</button>
+      <button onclick="alert('Paiement 1 mois - bientôt dispo via Orange Money / MTN / Carte bancaire')">S'abonner</button>
     </div>
 
-    <!-- Achat par contenu -->
     <div class="plan">
-      <h2>Achat par contenu</h2>
-      <p>Payez uniquement pour le film, la série ou la musique de votre choix.</p>
+      <h2>Accès à un film</h2>
+      <p>Regardez un film ou une série au choix. Le prix dépend du producteur (ex : 2000 FCFA).</p>
       <strong>À partir de 2000 FCFA</strong><br><br>
-      <button onclick="alert('Choisissez un contenu dans le catalogue pour voir son prix')">Voir les contenus</button>
+      <button onclick="alert('Paiement par film - bientôt dispo via Orange Money / MTN / Carte bancaire')">Acheter</button>
     </div>
   </section>
-</body>
-</html>      align-items: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      padding: 60px 20px;
-    }
-    .plan {
-      background: #111;
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      width: 280px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.1);
-      transition: transform 0.3s;
-    }
-    .plan:hover {
-      transform: scale(1.05);
-    }
-    .plan h2 {
-      font-size: 24px;
-      color: #e50914;
-      margin-bottom: 15px;
-    }
-    .plan p {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-    .plan strong {
-      font-size: 20px;
-      color: #fff;
-    }
-    .plan button {
-      padding: 12px 20px;
-      background-color: #e50914;
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .plan button:hover {
-      background-color: #b20710;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <a href="index.html"><img src="logo.png" alt="PAF Stream Logo"></a>
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="catalogue.html">Catalogue</a>
-      <a href="publier.html">Publier</a>
-      <a href="abonnement.html">Abonnement</a>
-      <a href="contact.html">Contact</a>
-      <a href="apropos.html">À propos</a>
-    </nav>
-  </header>
 
-  <section class="pricing">
-    <div class="plan">
-      <h2>Accès 7 jours</h2>
-      <p>Profitez de tous les films et séries pendant 7 jours.</p>
-      <strong>2000 FCFA</strong><br><br>
-      <button onclick="alert('Lien de paiement pour 7 jours')">S'abonner</button>
-    </div>
-
-    <div class="plan">
-      <h2>Accès 1 mois</h2>
-      <p>Films, séries et avant-premières pendant 30 jours.</p>
-      <strong>3000 FCFA</strong><br><br>
-      <button onclick="alert('Lien de paiement pour 1 mois')">S'abonner</button>
-    </div>
-  </section>
+  <script>
+    // Fermer le menu si on clique ailleurs
+    document.addEventListener("click", function(e) {
+      let nav = document.querySelector("nav");
+      let btn = document.querySelector(".menu-btn");
+      if (!nav.contains(e.target) && !btn.contains(e.target)) {
+        nav.classList.remove("active");
+      }
+    });
+  </script>
 </body>
 </html>
