@@ -1,204 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PAF Stream - Abonnement</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; }
-    .card { background: #111; border: none; padding: 20px; border-radius: 10px; }
-    .btn-main { background: #e50914; border: none; color: white; }
-    .btn-main:hover { background: darkred; }
-    footer { background: #111; text-align: center; padding: 20px; margin-top: 50px; font-size: 0.9rem; color: #bbb; }
-  </style>
-</head>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Abonnement | PAF Stream</title><link rel="stylesheet" href="style.css"/></head>
 <body>
-
-  <!-- Menu -->
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #111;">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">
-        <img src="logo.png" alt="PAF Stream" height="55" class="d-inline-block align-text-top">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
-          <li class="nav-item"><a class="nav-link" href="catalogue.html">Catalogue</a></li>
-          <li class="nav-item"><a class="nav-link" href="publier.html">Publier</a></li>
-          <li class="nav-item"><a class="nav-link active" href="abonnement.html">Abonnement</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="apropos.html">À propos</a></li>
-          <li class="nav-item"><a class="nav-link" href="dashboard.html">Tableau de bord</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Abonnement -->
-  <section class="container my-5">
-    <h2 class="text-center mb-4">💳 Choisissez votre formule</h2>
-    <div class="row g-4 justify-content-center">
-      <div class="col-md-4">
-        <div class="card text-center">
-          <h3>🎟️ 7 jours</h3>
-          <p>Accès complet films, séries et musique</p>
-          <h4>5 000 FCFA</h4>
-          <button class="btn btn-main mt-3">S'abonner</button>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card text-center">
-          <h3>📅 1 mois</h3>
-          <p>Accès premium illimité à tous les contenus</p>
-          <h4>10 000 FCFA</h4>
-          <button class="btn btn-main mt-3">S'abonner</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 PAF Stream - Tous droits réservés.</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>      height: 4px;
-      background: #fff;
-      margin: 5px 0;
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-    nav {
-      position: fixed;
-      top: 0;
-      right: -250px;
-      width: 250px;
-      height: 100%;
-      background: #111;
-      padding-top: 60px;
-      transition: 0.4s;
-    }
-    nav a {
-      display: block;
-      color: #fff;
-      text-decoration: none;
-      padding: 15px 20px;
-      font-weight: bold;
-    }
-    nav a:hover {
-      background: #e50914;
-    }
-    nav.active {
-      right: 0;
-    }
-
-    .pricing {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      padding: 120px 20px 60px;
-    }
-    .plan {
-      background: #111;
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      width: 280px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.1);
-      transition: transform 0.3s;
-    }
-    .plan:hover {
-      transform: scale(1.05);
-    }
-    .plan h2 {
-      font-size: 24px;
-      color: #e50914;
-      margin-bottom: 15px;
-    }
-    .plan p {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-    .plan strong {
-      font-size: 20px;
-      color: #fff;
-    }
-    .plan button {
-      padding: 12px 20px;
-      background-color: #e50914;
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .plan button:hover {
-      background-color: #b20710;
-    }
-  </style>
-</head>
-<body>
-  <!-- Header -->
-  <header>
-    <a href="index.html"><img src="logo.png" alt="PAF Stream Logo"></a>
-    <div class="menu-btn" onclick="document.querySelector('nav').classList.toggle('active')">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+  <header class="header">
+    <div class="brand"><img src="images/logo.png" alt="PAF Stream"></div>
+    <div class="menu-btn"><span></span><span></span><span></span></div>
+    <nav id="nav" class="nav-panel">
+      <a href="index.html">Accueil</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="abonnement.html">Abonnement</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <!-- Menu navigation -->
-  <nav>
-    <a href="index.html">Accueil</a>
-    <a href="catalogue.html">Catalogue</a>
-    <a href="abonnement.html">Abonnement</a>
-    <a href="contact.html">Contact</a>
-    <a href="apropos.html">À propos</a>
-  </nav>
+  <main>
+    <section class="section" style="padding-top:120px;text-align:center">
+      <h2>Choisissez votre formule</h2>
+      <div class="plans">
+        <div class="plan"><h3>7 jours</h3><div class="price">5 000 FCFA</div><p><button class="btn primary" data-buy data-price="5000 FCFA" data-title="Abonnement 7 jours">Payer</button></p></div>
+        <div class="plan"><h3>1 mois</h3><div class="price">10 000 FCFA</div><p><button class="btn primary" data-buy data-price="10000 FCFA" data-title="Abonnement 1 mois">Payer</button></p></div>
+      </div>
+      <p style="color:var(--muted);margin-top:18px">(Simulation — intégration Orange Money / MTN / CB à implémenter côté serveur)</p>
+    </section>
+  </main>
 
-  <!-- Section Abonnements -->
-  <section class="pricing">
-    <div class="plan">
-      <h2>Accès 7 jours</h2>
-      <p>Profitez de tous les films, séries et musiques pendant 7 jours.</p>
-      <strong>5000 FCFA</strong><br><br>
-      <button onclick="alert('Paiement 7 jours - bientôt dispo via Orange Money / MTN / Carte bancaire')">S'abonner</button>
-    </div>
-
-    <div class="plan">
-      <h2>Accès 1 mois</h2>
-      <p>Streaming illimité sur tout le catalogue pendant 30 jours.</p>
-      <strong>10000 FCFA</strong><br><br>
-      <button onclick="alert('Paiement 1 mois - bientôt dispo via Orange Money / MTN / Carte bancaire')">S'abonner</button>
-    </div>
-
-    <div class="plan">
-      <h2>Accès à un film</h2>
-      <p>Regardez un film ou une série au choix. Le prix dépend du producteur (ex : 2000 FCFA).</p>
-      <strong>À partir de 2000 FCFA</strong><br><br>
-      <button onclick="alert('Paiement par film - bientôt dispo via Orange Money / MTN / Carte bancaire')">Acheter</button>
-    </div>
-  </section>
-
-  <script>
-    // Fermer le menu si on clique ailleurs
-    document.addEventListener("click", function(e) {
-      let nav = document.querySelector("nav");
-      let btn = document.querySelector(".menu-btn");
-      if (!nav.contains(e.target) && !btn.contains(e.target)) {
-        nav.classList.remove("active");
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
