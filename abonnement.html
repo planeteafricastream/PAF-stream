@@ -3,38 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abonnement | PAF Stream</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>PAF Stream - Abonnement</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-    }
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 30px;
-      background-color: #111;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-    }
-    header img {
-      height: 40px;
-    }
-    .menu-btn {
-      display: block;
-      width: 30px;
-      height: 25px;
-      cursor: pointer;
-    }
-    .menu-btn span {
-      display: block;
-      height: 4px;
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; }
+    .card { background: #111; border: none; padding: 20px; border-radius: 10px; }
+    .btn-main { background: #e50914; border: none; color: white; }
+    .btn-main:hover { background: darkred; }
+    footer { background: #111; text-align: center; padding: 20px; margin-top: 50px; font-size: 0.9rem; color: #bbb; }
+  </style>
+</head>
+<body>
+
+  <!-- Menu -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #111;">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        <img src="logo.png" alt="PAF Stream" height="55" class="d-inline-block align-text-top">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="catalogue.html">Catalogue</a></li>
+          <li class="nav-item"><a class="nav-link" href="publier.html">Publier</a></li>
+          <li class="nav-item"><a class="nav-link active" href="abonnement.html">Abonnement</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="apropos.html">À propos</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Tableau de bord</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Abonnement -->
+  <section class="container my-5">
+    <h2 class="text-center mb-4">💳 Choisissez votre formule</h2>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4">
+        <div class="card text-center">
+          <h3>🎟️ 7 jours</h3>
+          <p>Accès complet films, séries et musique</p>
+          <h4>5 000 FCFA</h4>
+          <button class="btn btn-main mt-3">S'abonner</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center">
+          <h3>📅 1 mois</h3>
+          <p>Accès premium illimité à tous les contenus</p>
+          <h4>10 000 FCFA</h4>
+          <button class="btn btn-main mt-3">S'abonner</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 PAF Stream - Tous droits réservés.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>      height: 4px;
       background: #fff;
       margin: 5px 0;
       border-radius: 2px;
