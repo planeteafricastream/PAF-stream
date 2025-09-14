@@ -1,40 +1,88 @@
-<!DOCTYPE html>
+m<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PAF Stream - Accueil</title>
-  <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>PAF Stream — Accueil</title>
+  <link rel="stylesheet" href="style.css"/>
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
 
-    body {
-      font-family: "Poppins", sans-serif;
-      background-color: #141414;
-      color: #fff;
-    }
+  <header class="header">
+    <div class="brand">
+      <img src="images/logo.png" alt="PAF Stream logo">
+    </div>
 
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 1000;
-    }
+    <div class="menu-btn" role="button" aria-label="Ouvrir menu">
+      <span></span><span></span><span></span>
+    </div>
 
-    header img {
-      height: 40px;
-    }
+    <nav id="nav" class="nav-panel" aria-hidden="true">
+      <a href="index.html">Accueil</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="abonnement.html">Abonnement</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+      <a href="dashboard.html">Tableau de bord</a>
+    </nav>
+  </header>
 
+  <main>
+    <section class="hero" id="home">
+      <div class="inner">
+        <h1>Vos films, vos histoires, votre Afrique</h1>
+        <p>Streaming premium pour le cinéma et la musique africaine — avant-premières, exclusivités et plus.</p>
+        <a href="abonnement.html" class="btn primary">S'abonner</a>
+        <a href="catalogue.html" class="btn ghost">Voir le catalogue</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Nouveautés</h2>
+      <div class="row" id="row-new">
+        <div class="card"><img src="images/poster1.jpg" alt=""><div class="meta"><h3>Film A</h3><p>Prix: 2000 FCFA</p></div></div>
+        <div class="card"><img src="images/poster2.jpg" alt=""><div class="meta"><h3>Série B</h3><p>Épisode 1</p></div></div>
+        <div class="card"><img src="images/poster3.jpg" alt=""><div class="meta"><h3>Clip C</h3><p>Prix: 1000 FCFA</p></div></div>
+        <div class="card"><img src="images/poster4.jpg" alt=""><div class="meta"><h3>Film D</h3><p>Prix: 2500 FCFA</p></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Recommandés</h2>
+      <div class="row">
+        <div class="card"><img src="images/poster2.jpg" alt=""><div class="meta"><h3>Héritiers</h3><p>Série dramatique</p></div></div>
+        <div class="card"><img src="images/poster3.jpg" alt=""><div class="meta"><h3>La Route</h3><p>Road movie</p></div></div>
+        <div class="card"><img src="images/poster1.jpg" alt=""><div class="meta"><h3>Juste Pour Elle</h3><p>Clip</p></div></div>
+      </div>
+    </section>
+
+    <section class="section abonnement" id="abonnement">
+      <h2>Offres d'abonnement</h2>
+      <div class="plans">
+        <div class="plan"><h3>7 Jours</h3><div class="price">5 000 FCFA</div><a class="btn primary" href="abonnement.html">S'abonner</a></div>
+        <div class="plan"><h3>1 Mois</h3><div class="price">10 000 FCFA</div><a class="btn primary" href="abonnement.html">S'abonner</a></div>
+      </div>
+    </section>
+
+    <section class="section" id="contactPreview" style="text-align:center">
+      <h2>Contact rapide</h2>
+      <div class="contact-icons">
+        <a href="https://wa.me/237689325213" target="_blank" title="WhatsApp">🟢</a>
+        <a href="mailto:planeteafricastream@gmail.com" title="Email">✉️</a>
+        <a href="tel:+237689325213" title="Appel">📞</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2025 PAF Stream — Tous droits réservés.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
     nav a {
       margin-left: 20px;
       text-decoration: none;
