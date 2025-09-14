@@ -4,166 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PAF Stream - À propos</title>
-
-  <!-- Police professionnelle -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background-color: #000;
-      color: #fff;
-    }
-
-    /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #111;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      z-index: 1000;
-    }
-
-    .navbar .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #e50914;
-    }
-
-    /* Hamburger menu */
-    .menu-toggle {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 25px;
-      height: 20px;
-      cursor: pointer;
-    }
-
-    .menu-toggle span {
-      display: block;
-      height: 3px;
-      width: 100%;
-      background: #fff;
-      border-radius: 2px;
-    }
-
-    /* Menu caché */
-    .menu {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 250px;
-      height: 100vh;
-      background: #111;
-      display: flex;
-      flex-direction: column;
-      padding-top: 80px;
-      transition: right 0.3s ease-in-out;
-    }
-
-    .menu a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      padding: 15px 20px;
-      transition: background 0.3s;
-    }
-
-    .menu a:hover {
-      background: #e50914;
-    }
-
-    .menu.active {
-      right: 0;
-    }
-
-    /* Section À propos */
-    .apropos {
-      padding: 120px 20px 60px;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .apropos h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 20px;
-      color: #e50914;
-    }
-
-    .apropos img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      margin: 20px 0;
-      border: 3px solid #e50914;
-    }
-
-    .apropos p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-
-    .highlight {
-      color: #e50914;
-      font-weight: 700;
-      text-decoration: underline;
-    }
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; }
+    .about-section { max-width: 850px; margin: auto; padding: 50px 20px; line-height: 1.9; }
+    .highlight { color: #e50914; font-weight: bold; }
+    footer { background: #111; text-align: center; padding: 20px; margin-top: 50px; font-size: 0.9rem; color: #bbb; }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">PAF Stream</div>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </header>
-
   <!-- Menu -->
-  <nav class="menu" id="menu">
-    <a href="index.html">Accueil</a>
-    <a href="catalogue.html">Catalogue</a>
-    <a href="contact.html">Contact</a>
-    <a href="apropos.html">À propos</a>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #111;">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        <img src="logo.png" alt="PAF Stream" height="55" class="d-inline-block align-text-top">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="catalogue.html">Catalogue</a></li>
+          <li class="nav-item"><a class="nav-link" href="publier.html">Publier</a></li>
+          <li class="nav-item"><a class="nav-link" href="abonnement.html">Abonnement</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link active" href="apropos.html">À propos</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Tableau de bord</a></li>
+        </ul>
+      </div>
+    </div>
   </nav>
 
-  <!-- Section À propos -->
-  <section class="apropos">
-    <h1>À propos</h1>
-    <img src="pdg.jpg" alt="Photo du PDG">
+  <!-- À propos -->
+  <section class="about-section">
+    <h2 class="text-center mb-4">À propos de <span class="highlight">PAF Stream</span></h2>
     <p>
-      <span class="highlight">VENCESLASS GUEDBIGUE</span> est le PDG visionnaire de 
-      <strong>Planète Africa Production</strong> et de 
-      <strong>Planète Africa Film Stream (PAF Stream)</strong>.  
+      <span class="highlight">PAF Stream</span> est une plateforme de streaming 100% africaine pensée pour 
+      offrir au public un accès direct aux films, séries et musiques produits par les créateurs du continent.
+      Notre objectif est de bâtir un espace numérique moderne et sécurisé où le talent africain trouve une
+      vitrine internationale.
     </p>
     <p>
-      Passionné par le cinéma africain et l’innovation numérique, il a fondé PAF Stream pour offrir une plateforme 
-      dédiée aux films et séries africaines. Sa mission est de faire rayonner le talent africain à travers le monde 
-      grâce à une technologie moderne et accessible à tous.
+      La mission de <span class="highlight">PAF Stream</span> est triple : 
+      <br>✔️ Faciliter la diffusion des œuvres africaines auprès d’un large public.  
+      <br>✔️ Garantir une rémunération équitable aux producteurs grâce à un système de monétisation transparent.  
+      <br>✔️ Offrir aux spectateurs une expérience fluide, avec plusieurs moyens de paiement (Orange Money, MTN Money, carte bancaire).  
     </p>
     <p>
-      Sous sa direction, Planète Africa a produit plusieurs projets de grande qualité et s’impose comme un acteur 
-      majeur de l’industrie cinématographique africaine.
+      Plus qu’une simple plateforme de streaming, <span class="highlight">PAF Stream</span> est un 
+      projet culturel et économique qui vise à valoriser les talents africains, renforcer l’industrie
+      audiovisuelle locale et créer un pont entre l’Afrique et le reste du monde.
+    </p>
+    <p class="text-center mt-4">
+      <em>"Vos films, vos histoires, votre Afrique"</em>
     </p>
   </section>
 
-  <script>
-    function toggleMenu() {
-      document.getElementById('menu').classList.toggle('active');
-    }
-  </script>
+  <footer>
+    <p>&copy; 2025 PAF Stream - Tous droits réservés.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
