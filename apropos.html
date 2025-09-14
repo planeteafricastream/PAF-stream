@@ -1,71 +1,38 @@
+
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PAF Stream - À propos</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; }
-    .about-section { max-width: 850px; margin: auto; padding: 50px 20px; line-height: 1.9; }
-    .highlight { color: #e50914; font-weight: bold; }
-    footer { background: #111; text-align: center; padding: 20px; margin-top: 50px; font-size: 0.9rem; color: #bbb; }
-  </style>
-</head>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>À propos | PAF Stream</title><link rel="stylesheet" href="style.css"/></head>
 <body>
+  <header class="header">
+    <div class="brand"><img src="images/logo.png" alt="PAF Stream"></div>
+    <div class="menu-btn"><span></span><span></span><span></span></div>
+    <nav id="nav" class="nav-panel">
+      <a href="index.html">Accueil</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="abonnement.html">Abonnement</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-  <!-- Menu -->
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #111;">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">
-        <img src="logo.png" alt="PAF Stream" height="55" class="d-inline-block align-text-top">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
-          <li class="nav-item"><a class="nav-link" href="catalogue.html">Catalogue</a></li>
-          <li class="nav-item"><a class="nav-link" href="publier.html">Publier</a></li>
-          <li class="nav-item"><a class="nav-link" href="abonnement.html">Abonnement</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link active" href="apropos.html">À propos</a></li>
-          <li class="nav-item"><a class="nav-link" href="dashboard.html">Tableau de bord</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <main>
+    <section class="section" style="padding-top:120px;max-width:900px;margin:0 auto">
+      <h2>À propos de PAF Stream</h2>
+      <p style="color:var(--muted);margin-top:12px">
+        <strong>PAF Stream</strong> est une plateforme de streaming dédiée au contenu africain.
+        Notre objectif : offrir une vitrine professionnelle aux réalisateurs et producteurs, 
+        permettre la monétisation équitable des œuvres, et proposer au public une expérience fluide via des abonnements et achats à l’unité.
+      </p>
+      <h3 style="color:var(--accent);margin-top:18px">Nos objectifs</h3>
+      <ul style="margin-top:8px;color:var(--muted);line-height:1.7">
+        <li>Permettre aux créateurs de monétiser leurs œuvres.</li>
+        <li>Offrir aux spectateurs un catalogue riche et sécurisé.</li>
+        <li>Mise en place d’un reversement automatique (commission pour la plateforme).</li>
+        <li>Statistiques détaillées pour chaque vidéo (vues, achats, revenus).</li>
+      </ul>
+    </section>
+  </main>
 
-  <!-- À propos -->
-  <section class="about-section">
-    <h2 class="text-center mb-4">À propos de <span class="highlight">PAF Stream</span></h2>
-    <p>
-      <span class="highlight">PAF Stream</span> est une plateforme de streaming 100% africaine pensée pour 
-      offrir au public un accès direct aux films, séries et musiques produits par les créateurs du continent.
-      Notre objectif est de bâtir un espace numérique moderne et sécurisé où le talent africain trouve une
-      vitrine internationale.
-    </p>
-    <p>
-      La mission de <span class="highlight">PAF Stream</span> est triple : 
-      <br>✔️ Faciliter la diffusion des œuvres africaines auprès d’un large public.  
-      <br>✔️ Garantir une rémunération équitable aux producteurs grâce à un système de monétisation transparent.  
-      <br>✔️ Offrir aux spectateurs une expérience fluide, avec plusieurs moyens de paiement (Orange Money, MTN Money, carte bancaire).  
-    </p>
-    <p>
-      Plus qu’une simple plateforme de streaming, <span class="highlight">PAF Stream</span> est un 
-      projet culturel et économique qui vise à valoriser les talents africains, renforcer l’industrie
-      audiovisuelle locale et créer un pont entre l’Afrique et le reste du monde.
-    </p>
-    <p class="text-center mt-4">
-      <em>"Vos films, vos histoires, votre Afrique"</em>
-    </p>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 PAF Stream - Tous droits réservés.</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
