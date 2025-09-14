@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Abonnement | PAF Stream</title><link rel="stylesheet" href="style.css"/></head>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Abonnement | PAF Stream</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
 <body>
   <header class="header">
     <div class="brand"><img src="images/logo.png" alt="PAF Stream"></div>
@@ -18,13 +23,46 @@
     <section class="section" style="padding-top:120px;text-align:center">
       <h2>Choisissez votre formule</h2>
       <div class="plans">
-        <div class="plan"><h3>7 jours</h3><div class="price">5 000 FCFA</div><p><button class="btn primary" data-buy data-price="5000 FCFA" data-title="Abonnement 7 jours">Payer</button></p></div>
-        <div class="plan"><h3>1 mois</h3><div class="price">10 000 FCFA</div><p><button class="btn primary" data-buy data-price="10000 FCFA" data-title="Abonnement 1 mois">Payer</button></p></div>
+
+        <!-- Offre 7 jours -->
+        <div class="plan">
+          <h3>7 jours</h3>
+          <div class="price">5 000 FCFA</div>
+          <p>
+            <button class="btn primary" onclick="payerOffre(5000, 'Abonnement 7 jours')">
+              Payer
+            </button>
+          </p>
+        </div>
+
+        <!-- Offre 1 mois -->
+        <div class="plan">
+          <h3>1 mois</h3>
+          <div class="price">10 000 FCFA</div>
+          <p>
+            <button class="btn primary" onclick="payerOffre(10000, 'Abonnement 1 mois')">
+              Payer
+            </button>
+          </p>
+        </div>
+
       </div>
-      <p style="color:var(--muted);margin-top:18px">(Simulation — intégration Orange Money / MTN / CB à implémenter côté serveur)</p>
+
+      <p style="color:var(--muted);margin-top:18px">
+        (Paiement de test via PayUnit – aucun vrai débit)
+      </p>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    function payerOffre(montant, description) {
+      window.location.href = "https://checkout.payunit.net?"
+        + "amount=" + montant
+        + "&currency=XAF"
+        + "&publicKey=sand_V7sUqoGGuD0bwV1PgkJ7zLGcfi25RB"
+        + "&description=" + encodeURIComponent(description)
+        + "&transactionId=" + Date.now(); // ID unique
+    }
+  </script>
 </body>
 </html>
