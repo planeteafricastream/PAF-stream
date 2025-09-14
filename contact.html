@@ -1,59 +1,31 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PAF Stream - Contact</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; }
-    .contact-icons { display: flex; justify-content: center; gap: 40px; margin-top: 50px; }
-    .contact-icons a { color: #e50914; font-size: 3rem; transition: transform 0.3s; }
-    .contact-icons a:hover { transform: scale(1.2); color: #fff; }
-    footer { background: #111; text-align: center; padding: 20px; margin-top: 50px; font-size: 0.9rem; color: #bbb; }
-  </style>
-</head>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Contact | PAF Stream</title><link rel="stylesheet" href="style.css"/></head>
 <body>
+  <header class="header">
+    <div class="brand"><img src="images/logo.png" alt="PAF Stream"></div>
+    <div class="menu-btn"><span></span><span></span><span></span></div>
+    <nav id="nav" class="nav-panel">
+      <a href="index.html">Accueil</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="abonnement.html">Abonnement</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-  <!-- Menu -->
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #111;">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">
-        <img src="logo.png" alt="PAF Stream" height="55" class="d-inline-block align-text-top">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
-          <li class="nav-item"><a class="nav-link" href="catalogue.html">Catalogue</a></li>
-          <li class="nav-item"><a class="nav-link" href="publier.html">Publier</a></li>
-          <li class="nav-item"><a class="nav-link" href="abonnement.html">Abonnement</a></li>
-          <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="apropos.html">À propos</a></li>
-          <li class="nav-item"><a class="nav-link" href="dashboard.html">Tableau de bord</a></li>
-        </ul>
+  <main>
+    <section class="section" style="padding-top:120px;text-align:center">
+      <h2>Contact</h2>
+      <p style="color:var(--muted);">Cliquez sur une icône pour contacter directement</p>
+      <div class="contact-icons" style="margin-top:20px">
+        <a href="https://wa.me/237689325213" target="_blank" title="WhatsApp">🟢</a>
+        <a href="mailto:planeteafricastream@gmail.com" title="Email">✉️</a>
+        <a href="tel:+237689325213" title="Appel">📞</a>
       </div>
-    </div>
-  </nav>
+    </section>
+  </main>
 
-  <!-- Contact -->
-  <section class="container text-center my-5">
-    <h2>📞 Contactez-nous</h2>
-    <p>Cliquez sur une icône pour nous joindre directement.</p>
-    <div class="contact-icons">
-      <a href="https://wa.me/237689325213" target="_blank"><i class="bi bi-whatsapp"></i></a>
-      <a href="mailto:planeteafricastream@gmail.com"><i class="bi bi-envelope"></i></a>
-      <a href="tel:+237689325213"><i class="bi bi-telephone"></i></a>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 PAF Stream - Tous droits réservés.</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
