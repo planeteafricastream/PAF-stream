@@ -1,51 +1,160 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catalogue | PAF Stream</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #141414;
+      color: white;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+    }
+
+    header img {
+      height: 40px;
+    }
+
+    .menu-btn {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .menu-btn span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: white;
+    }
+
+    .nav-panel {
+      display: none;
+      flex-direction: column;
+      background: #000;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .nav-panel a {
+      color: white;
+      text-decoration: none;
+      margin: 8px 0;
+      display: block;
+    }
+
+    main {
+      padding-top: 100px;
+      text-align: center;
+    }
+
+    .catalogue {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .film-card {
+      background: #1f1f1f;
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .film-card:hover {
+      transform: scale(1.05);
+    }
+    .film-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+    .film-card h3 {
+      margin: 15px 0 10px;
+    }
+    .btn {
+      display: inline-block;
+      margin: 10px 0 20px;
+      padding: 10px 20px;
+      background: #e50914;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <div class="brand"><img src="images/logo.png" alt="PAF Stream"></div>
-    <div class="menu-btn" role="button"><span></span><span></span><span></span></div>
+
+  <!-- Header -->
+  <header>
+    <img src="logo.png" alt="PAF Stream">
+    <div class="menu-btn" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
     <nav id="nav" class="nav-panel">
       <a href="index.html">Accueil</a>
-      <a href="catalogue.html">Catalogue</a>
+      <a href="catalogue.html" class="active">Catalogue</a>
       <a href="abonnement.html">Abonnement</a>
       <a href="apropos.html">À propos</a>
       <a href="contact.html">Contact</a>
-      <a href="dashboard.html">Tableau de bord</a>
     </nav>
   </header>
 
+  <!-- Catalogue -->
   <main>
-    <section class="section" style="padding-top:120px">
-      <h2>Catalogue complet</h2>
-      <div class="row">
-        <div class="card">
-          <img src="images/poster1.jpg" alt="Film A">
-          <div class="meta"><h3>Film A</h3><p>2000 FCFA</p><p><button class="btn primary" data-buy data-price="2000 FCFA" data-title="Film A">Acheter</button></p></div>
-        </div>
+    <h2>🎬 Catalogue PAF Stream</h2>
+    <div class="catalogue">
 
-        <div class="card">
-          <img src="images/poster2.jpg" alt="Série B">
-          <div class="meta"><h3>Série B - Ep1</h3><p>500 FCFA</p><p><button class="btn primary" data-buy data-price="500 FCFA" data-title="Série B - Ep1">Acheter</button></p></div>
-        </div>
-
-        <div class="card">
-          <img src="images/poster3.jpg" alt="Clip C">
-          <div class="meta"><h3>Clip C</h3><p>1000 FCFA</p><p><button class="btn primary" data-buy data-price="1000 FCFA" data-title="Clip C">Acheter</button></p></div>
-        </div>
-
-        <div class="card">
-          <img src="images/poster4.jpg" alt="Film D">
-          <div class="meta"><h3>Film D</h3><p>2500 FCFA</p><p><button class="btn primary" data-buy data-price="2500 FCFA" data-title="Film D">Acheter</button></p></div>
-        </div>
+      <!-- Film Héritiers -->
+      <div class="film-card">
+        <img src="images/heritiers.jpg" alt="Héritiers">
+        <h3>Série : Héritiers</h3>
+        <a href="#" class="btn" onclick="payerFilm('Héritiers', 2000)">Voir (2000 FCFA)</a>
       </div>
-    </section>
+
+      <!-- Film Genesis -->
+      <div class="film-card">
+        <img src="images/genesis.jpg" alt="Genesis">
+        <h3>Film : Genesis</h3>
+        <a href="#" class="btn" onclick="payerFilm('Genesis', 2000)">Voir (2000 FCFA)</a>
+      </div>
+
+    </div>
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    // Menu toggle
+    function toggleMenu() {
+      const nav = document.getElementById("nav");
+      nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+    }
+
+    // Simulation paiement (PayUnit / Orange Money / MTN Money plus tard)
+    function payerFilm(titre, montant) {
+      alert("Paiement de " + montant + " FCFA pour accéder à : " + titre);
+      // Ici on mettra le vrai lien PayUnit
+    }
+  </script>
 </body>
 </html>
