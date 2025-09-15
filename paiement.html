@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Paiement | PAF Stream</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body style="text-align:center;padding:100px">
+  <h1 id="status">Traitement du paiement...</h1>
+  <p id="details"></p>
+
+  <script>
+    // Lire les paramètres dans l'URL (succès ou échec)
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get("status"); // PayUnit renvoie success / cancelled
+    const transactionId = params.get("transactionId");
+
+    if (status === "success") {
+      document.getElementById("status").innerText = "✅ Paiement réussi !";
+      document.getElementById("details").innerText =
+        "Transaction ID : " + transactionId;
+    } else if (status === "cancelled") {
+      document.getElementById("status").innerText = "❌ Paiement annulé";
+      document.getElementById("details").innerText =
+        "Vous avez quitté la page de paiement.";
+    } else {
+      document.getElementById("status").innerText = "⏳ En attente de confirmation...";
+    }
+  </script>
+</body>
+</html>
