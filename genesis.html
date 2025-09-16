@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Genesis — PAF Stream</title><link rel="stylesheet" href="style.css"/></head>
+<body>
+  <header class="header">
+    <div class="brand"><img src="logo.png" alt="PAF Stream"></div>
+    <div class="menu-btn"><span></span><span></span><span></span></div>
+    <nav id="nav-panel" class="nav-panel">
+      <a href="index.html">Accueil</a><a href="catalogue.html">Catalogue</a><a href="abonnement.html">Abonnement</a><a href="apropos.html">À propos</a><a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="detail-wrap" style="padding-top:26px">
+      <div>
+        <img src="genesis.jpg" alt="Genesis" style="width:100%;border-radius:8px;"/>
+      </div>
+      <div>
+        <h2>Genesis (Film)</h2>
+        <p style="color:var(--muted)">Film dramatique. Accès unique : <strong>2000 FCFA</strong></p>
+
+        <div id="accessArea" style="margin-top:18px"></div>
+
+        <h3 style="margin-top:22px;color:var(--accent)">Synopsis</h3>
+        <p style="color:var(--muted)">Genesis suit l'histoire d'un jeune héros qui découvre son héritage et affronte des défis immenses.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2025 PAF Stream</footer>
+
+  <script src="script.js"></script>
+  <script>
+    const key = 'purchased_genesis';
+    const accessArea = document.getElementById('accessArea');
+
+    function render() {
+      if(localStorage.getItem(key) === 'purchased') {
+        accessArea.innerHTML = `
+          <div style="background:#000;padding:10px;border-radius:8px">
+            <video controls style="width:100%;max-height:420px">
+              <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+              Votre navigateur ne supporte pas la lecture vidéo.
+            </video>
+            <p style="color:var(--muted);margin-top:8px">Vous avez accès à Genesis.</p>
+          </div>`;
+      } else {
+        accessArea.innerHTML = `<button class="btn" onclick="simulatePurchase('${key}','Genesis',2000,location.href)">Payer 2000 FCFA pour voir</button>`;
+      }
+    }
+    render();
+  </script>
+</body>
+</html>
