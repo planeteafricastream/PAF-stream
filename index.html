@@ -5,80 +5,66 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>PAF Stream — Accueil</title>
   <link rel="stylesheet" href="style.css"/>
-  <!-- Google font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-
   <header class="header">
-    <div class="brand">
-      <img src="logo.png" alt="PAF Stream logo">
-    </div>
-
-    <div class="menu-btn" role="button" aria-label="Ouvrir menu">
-      <span></span><span></span><span></span>
-    </div>
-
-    <nav id="nav" class="nav-panel" aria-hidden="true">
+    <div class="brand"><img src="logo.png" alt="PAF Stream"></div>
+    <div class="menu-btn"><span></span><span></span><span></span></div>
+    <nav id="nav-panel" class="nav-panel">
       <a href="index.html">Accueil</a>
       <a href="catalogue.html">Catalogue</a>
       <a href="abonnement.html">Abonnement</a>
       <a href="apropos.html">À propos</a>
       <a href="contact.html">Contact</a>
-      <a href="dashboard.html">Tableau de bord</a>
     </nav>
   </header>
 
   <main>
-    <section class="hero" id="home">
-      <div class="inner">
+    <section class="hero">
+      <div class="wrap">
         <h1>Vos films, vos histoires, votre Afrique</h1>
-        <p>Streaming premium pour le cinéma et la musique africaine — avant-premières, exclusivités et plus.</p>
-        <a href="abonnement.html" class="btn primary">S'abonner</a>
-        <a href="catalogue.html" class="btn ghost">Voir le catalogue</a>
+        <p>Bienvenue sur PAF Stream — découvrez vos meilleurs FILMS, série, clip vidéo à streaming ici.</p>
+        <div style="margin-top:10px;">
+          <a href="catalogue.html" class="btn">Voir le catalogue</a>
+          <a href="abonnement.html" class="btn ghost">S'abonner</a>
+        </div>
       </div>
     </section>
 
-    <section class="section">
-      <h2>Nouveautés</h2>
-      <div class="row" id="row-new">
-        <div class="card"><img src="images/poster1.jpg" alt=""><div class="meta"><h3>Film A</h3><p>Prix: 2000 FCFA</p></div></div>
-        <div class="card"><img src="images/poster2.jpg" alt=""><div class="meta"><h3>Série B</h3><p>Épisode 1</p></div></div>
-        <div class="card"><img src="images/poster3.jpg" alt=""><div class="meta"><h3>Clip C</h3><p>Prix: 1000 FCFA</p></div></div>
-        <div class="card"><img src="images/poster4.jpg" alt=""><div class="meta"><h3>Film D</h3><p>Prix: 2500 FCFA</p></div></div>
+    <section style="padding:18px 0">
+      <div class="search-box">
+        <input id="searchBar" placeholder="🔍 Rechercher Héritiers ou Genesis..." />
       </div>
-    </section>
 
-    <section class="section">
-      <h2>Recommandés</h2>
-      <div class="row">
-        <div class="card"><img src="images/poster2.jpg" alt=""><div class="meta"><h3>Héritiers</h3><p>Série dramatique</p></div></div>
-        <div class="card"><img src="images/poster3.jpg" alt=""><div class="meta"><h3>La Route</h3><p>Road movie</p></div></div>
-        <div class="card"><img src="images/poster1.jpg" alt=""><div class="meta"><h3>Juste Pour Elle</h3><p>Clip</p></div></div>
-      </div>
-    </section>
+      <div class="catalogue" id="catalogue">
+        <!-- Héritiers -->
+        <div class="film-card" onclick="location.href='heritiers.html'">
+          <img src="heritiers.jpg" alt="Héritiers">
+          <div class="card-body">
+            <h3>Héritiers (Série)</h3>
+            <p>Une série dramatique africaine.</p>
+            <div class="price">Accès à l'épisode : 2000 FCFA</div>
+            <div style="margin-top:8px"><span class="btn" onclick="event.stopPropagation(); simulatePurchase('purchased_heritiers','Héritiers',2000,'heritiers.html')">Payer 2000 FCFA</span></div>
+          </div>
+        </div>
 
-    <section class="section abonnement" id="abonnement">
-      <h2>Offres d'abonnement</h2>
-      <div class="plans">
-        <div class="plan"><h3>7 Jours</h3><div class="price">5 000 FCFA</div><a class="btn primary" href="abonnement.html">S'abonner</a></div>
-        <div class="plan"><h3>1 Mois</h3><div class="price">10 000 FCFA</div><a class="btn primary" href="abonnement.html">S'abonner</a></div>
+        <!-- Genesis -->
+        <div class="film-card" onclick="location.href='genesis.html'">
+          <img src="genesis.jpg" alt="Genesis">
+          <div class="card-body">
+            <h3>Genesis (Film)</h3>
+            <p>Un film émotionnel et puissant.</p>
+            <div class="price">Accès : 2000 FCFA</div>
+            <div style="margin-top:8px"><span class="btn" onclick="event.stopPropagation(); simulatePurchase('purchased_genesis','Genesis',2000,'genesis.html')">Payer 2000 FCFA</span></div>
+          </div>
+        </div>
       </div>
-    </section>
 
-    <section class="section" id="contactPreview" style="text-align:center">
-      <h2>Contact rapide</h2>
-      <div class="contact-icons">
-        <a href="https://wa.me/237689325213" target="_blank" title="WhatsApp">🟢</a>
-        <a href="mailto:planeteafricastream@gmail.com" title="Email">✉️</a>
-        <a href="tel:+237689325213" title="Appel">📞</a>
-      </div>
+      <p id="noResult" style="display:none;color:#999;margin-top:14px;text-align:center">Aucun résultat</p>
     </section>
   </main>
 
-  <footer class="footer">
-    © 2025 PAF Stream — Tous droits réservés.
-  </footer>
+  <footer class="footer">© 2025 PAF Stream — Tous droits réservés.</footer>
 
   <script src="script.js"></script>
 </body>
