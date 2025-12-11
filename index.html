@@ -44,7 +44,7 @@
             <h3>Héritiers (Série)</h3>
             <p>Une série dramatique africaine.</p>
             <div class="price">Accès à l'épisode : 2000 FCFA</div>
-            <div style="margin-top:8px"><span class="btn" onclick="event.stopPropagation(); simulatePurchase('purchased_heritiers','Héritiers',2000,'heritiers.html')">Payer 2000 FCFA</span></div>
+            <div style="margin-top:8px"><span class="btn" onclick="event.stopPropagation(); payOrangeMoney('Héritiers',2000,'heritiers.html')">Payer 2000 FCFA</span></div>
           </div>
         </div>
 
@@ -55,7 +55,7 @@
             <h3>Genesis (Film)</h3>
             <p>Un film émotionnel et puissant.</p>
             <div class="price">Accès : 2000 FCFA</div>
-            <div style="margin-top:8px"><span class="btn" onclick="event.stopPropagation(); simulatePurchase('purchased_genesis','Genesis',2000,'genesis.html')">Payer 2000 FCFA</span></div>
+            <div style="margin-top:8px"><span class="btn" onclick="event.stopPropagation(); payOrangeMoney('Genesis',2000,'genesis.html')">Payer 2000 FCFA</span></div>
           </div>
         </div>
       </div>
@@ -67,5 +67,82 @@
   <footer class="footer">© 2025 PAF Stream — Tous droits réservés.</footer>
 
   <script src="script.js"></script>
+
+  <!-- AJOUT PAF STREAM : POPUP EMAIL + CODE ORANGE MONEY -->
+  <div id="omPopup" style="
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.6);display:none;justify-content:center;align-items:center;
+  ">
+    <div style="background:#fff;padding:20px;border-radius:8px;width:90%;max-width:350px;">
+      <h3>Confirmer votre paiement</h3>
+      <p>Saisissez votre email et le code de transaction Orange Money.</p>
+
+      <input id="omEmail" placeholder="Votre email" style="width:100%;padding:8px;margin-top:8px;">
+      <input id="omCode" placeholder="Code OM reçu (référence)" style="width:100%;padding:8px;margin-top:8px;">
+
+      <button onclick="sendConfirmation()" style="margin-top:12px;width:100%;padding:10px;background:#ff6600;color:#fff;border:none;border-radius:5px;">Valider</button>
+
+      <p id="omStatus" style="margin-top:10px;color:#444;font-size:0.9em"></p>
+    </div>
+  </div>
+
+  <!-- AJOUT PAF STREAM : SCRIPT ORANGE MONEY -->
+  <script>
+    let currentFilm = null;
+    let currentPrice = null;
+    let currentRedirect = null;
+
+    function payOrangeMoney(film, price, redirect){
+      currentFilm = film;
+      currentPrice = price;
+      currentRedirect = redirect;
+
+      // 1) Lancer USSD : #150*1*1*NUMERO*PRIX#
+      const ussd = `tel:*150*1*1*689325213*${price}%23`;
+      window.location.href = ussd;
+
+      // 2) Afficher la popup pour email + code OM
+      setTimeout(()=>{
+        document.getElementById('omPopup').style.display = "flex";
+      }, 3000);
+    }
+
+    function sendConfirmation(){
+      const email = document.getElementById('omEmail').value;
+      const code = document.getElementById('omCode').value;
+      const status = document.getElementById('omStatus');
+
+      if(!email || !code){
+        status.innerHTML = "Veuillez remplir tous les champs.";
+        return;
+      }
+
+      status.innerHTML = "Envoi en cours…";
+
+      // future backend (étape suivante)
+      fetch("/confirm-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          film: currentFilm,
+          email: email,
+          code: code,
+          price: currentPrice
+        })
+      })
+      .then(res => res.json())
+      .then(data =>{
+        status.innerHTML = "Lien envoyé à votre email. Merci !";
+
+        setTimeout(()=>{
+          window.location.href = currentRedirect;
+        }, 2000);
+      })
+      .catch(()=>{
+        status.innerHTML = "Erreur de connexion.";
+      });
+    }
+  </script>
+
 </body>
 </html>
