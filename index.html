@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>PAF Stream — Accueil</title>
+  <title>PAF Stream — Accueil (version locale)</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -33,29 +33,18 @@
 
     <section style="padding:18px 0">
       <div class="search-box">
-        <input id="searchBar" placeholder="🔍 Rechercher Héritiers ou Genesis..." />
+        <input id="searchBar" placeholder="🔍 Rechercher  ou Genesis..." />
       </div>
 
       <div class="catalogue" id="catalogue">
-        <!-- Héritiers -->
-        <div class="film-card" onclick="location.href='heritiers.html'">
-          <img src="heritiers.jpg" alt="Héritiers">
-          <div class="card-body">
-            <h3>Héritiers (Série)</h3>
-            <p>Une série dramatique africaine.</p>
-            <div class="price">Accès à l'épisode : 2000 FCFA</div>
-            <div style="margin-top:8px"><span class="btn" onclick="event.stopPropagation(); payOrangeMoney('Héritiers',2000,'heritiers.html')">Payer 2000 FCFA</span></div>
-          </div>
-        </div>
-
         <!-- Genesis -->
         <div class="film-card" onclick="location.href='genesis.html'">
           <img src="genesis.jpg" alt="Genesis">
           <div class="card-body">
             <h3>Genesis (Film)</h3>
             <p>Un film émotionnel et puissant.</p>
-            <div class="price">Accès : 2000 FCFA</div>
-            <div style="margin-top:8px"><span class="btn" onclick="event.stopPropagation(); payOrangeMoney('Genesis',2000,'genesis.html')">Payer 2000 FCFA</span></div>
+            <div class="price">Accès : 1000 FCFA</div>
+            <div style="margin-top:8px"><span class="btn" onclick="event.stopPropagation(); payOrangeMoney('Genesis',1000,'genesis.html')">Payer 1000 FCFA</span></div>
           </div>
         </div>
       </div>
@@ -65,8 +54,6 @@
   </main>
 
   <footer class="footer">© 2025 PAF Stream — Tous droits réservés.</footer>
-
-  <script src="script.js"></script>
 
   <!-- AJOUT PAF STREAM : POPUP EMAIL + CODE ORANGE MONEY -->
   <div id="omPopup" style="
@@ -86,7 +73,7 @@
     </div>
   </div>
 
-  <!-- AJOUT PAF STREAM : SCRIPT ORANGE MONEY -->
+  <!-- AJOUT PAF STREAM : SCRIPT ORANGE MONEY (version compatible GitHub Pages - stockage local) -->
   <script>
     let currentFilm = null;
     let currentPrice = null;
@@ -97,19 +84,22 @@
       currentPrice = price;
       currentRedirect = redirect;
 
-      // 1) Lancer USSD : #150*1*1*NUMERO*PRIX#
+      // 1) Lancer USSD : *150*1*1*TON_NUMERO*PRIX#
+      // Note: le navigateur mobile va tenter d'ouvrir l'application téléphonie.
       const ussd = `tel:*150*1*1*689325213*${price}%23`;
       window.location.href = ussd;
 
-      // 2) Afficher la popup pour email + code OM
+      // 2) Afficher la popup pour email + code OM (l'utilisateur verra la popup après le paiement)
       setTimeout(()=>{
         document.getElementById('omPopup').style.display = "flex";
       }, 3000);
     }
 
+    // Méthode locale (simple et gratuite) : on enregistre la preuve de paiement côté client (localStorage)
+    // IMPORTANT : cette méthode n'est pas inviolable — c'est une solution rapide pour GitHub Pages.
     function sendConfirmation(){
-      const email = document.getElementById('omEmail').value;
-      const code = document.getElementById('omCode').value;
+      const email = document.getElementById('omEmail').value.trim();
+      const code = document.getElementById('omCode').value.trim();
       const status = document.getElementById('omStatus');
 
       if(!email || !code){
@@ -117,32 +107,69 @@
         return;
       }
 
-      status.innerHTML = "Envoi en cours…";
+      status.innerHTML = "Confirmation enregistrée...";
 
-      // future backend (étape suivante)
-      fetch("/confirm-payment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          film: currentFilm,
-          email: email,
-          code: code,
-          price: currentPrice
-        })
-      })
-      .then(res => res.json())
-      .then(data =>{
-        status.innerHTML = "Lien envoyé à votre email. Merci !";
+      // Récupère l'objet des paiements existants
+      const payments = JSON.parse(localStorage.getItem("paf_payments") || "{}");
+      // Stocke le paiement pour ce film (valeur simple true + métadonnées)
+      payments[currentFilm] = {
+        paid: true,
+        price: currentPrice,
+        email: email,
+        code: code,
+        date: new Date().toISOString()
+      };
+      localStorage.setItem("paf_payments", JSON.stringify(payments));
 
-        setTimeout(()=>{
-          window.location.href = currentRedirect;
-        }, 2000);
-      })
-      .catch(()=>{
-        status.innerHTML = "Erreur de connexion.";
-      });
+      // Message à l'utilisateur puis redirection vers la page du film
+      status.innerHTML = "Paiement confirmé ! Accès en cours…";
+
+      setTimeout(()=>{
+        document.getElementById('omPopup').style.display = "none";
+        window.location.href = currentRedirect;
+      }, 1400);
     }
+
+    // Optionnel : mise à jour des boutons "Payer" si l'utilisateur a déjà payé
+    // (ne change pas la structure HTML, juste le texte du bouton)
+    window.addEventListener('DOMContentLoaded', ()=>{
+      const payments = JSON.parse(localStorage.getItem("paf_payments") || "{}");
+      document.querySelectorAll('.film-card').forEach(card => {
+        const titleEl = card.querySelector('.card-body h3');
+        if(!titleEl) return;
+        const title = titleEl.textContent.trim();
+        const btn = card.querySelector('.card-body .btn');
+        if(payments[title] && btn){
+          btn.textContent = 'Regarder';
+          btn.onclick = (e)=>{ e.stopPropagation(); location.href = card.getAttribute('onclick')?.match(/'([^']+)'/)?.[1] || currentRedirect; };
+        }
+      });
+    });
   </script>
 
+  <!--
+    NOTE POUR LES PAGES DE FILMS (ex : heritiers.html, genesis.html)
+
+    Ajoute en haut de chaque page film (avant d'afficher l'iframe) ce petit script pour vérifier que l'utilisateur a payé :
+
+    <script>
+      const payments = JSON.parse(localStorage.getItem('paf_payments') || '{}');
+      if(!payments[''] || !payments[''].paid){
+        // redirige vers l'accueil si l'utilisateur n'a pas payé
+        window.location.href = 'index.html';
+      }
+    </script>
+
+    Remplace '' par le titre exact utilisé sur la page catalogue.
+
+    TESTS à effectuer:
+    1) Ouvre index.html sur ton téléphone, clique sur "Payer" -> l'USSD doit s'ouvrir (ou être proposé). Après le paiement, remplis la popup avec email+code.
+    2) Après validation, tu dois être redirigé vers la page du film et pouvoir visionner la vidéo.
+    3) Vérifie dans la console (localStorage) que l'objet "paf_payments" contient les données.
+
+    Quand tu veux évoluer vers une version plus sécurisée (EmailJS, backend, webhook OM), je préparerai l'étape suivante.
+  -->
+
 </body>
-</html>
+  </html>
+  
