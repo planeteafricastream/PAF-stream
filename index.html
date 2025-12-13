@@ -1,60 +1,86 @@
 <!DOCTYPE html><html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>PAF Stream — Genesis</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PAF Stream — GENESIS</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body{margin:0;background:#0b0b0b;color:#f2f2f2;font-family:Arial,Helvetica,sans-serif}
+    header{padding:14px 20px;border-bottom:1px solid #222;display:flex;align-items:center}
+    header img{height:42px}
+    .container{max-width:1000px;margin:auto;padding:24px 16px}
+    .hero{display:grid;grid-template-columns:1fr;gap:26px}
+    .poster{display:flex;justify-content:center}
+    .poster img{width:100%;max-width:420px;border-radius:14px;box-shadow:0 20px 45px rgba(0,0,0,.65)}
+    .content h1{font-size:2.3rem;margin:0 0 10px}
+    .tag{display:inline-block;background:#d4af37;color:#000;padding:4px 10px;border-radius:20px;font-size:.85rem;margin-bottom:14px}
+    .content p{color:#d0d0d0;line-height:1.7}
+    .actions{margin-top:26px;display:flex;flex-direction:column;gap:14px}
+    .btn{padding:15px;border-radius:10px;text-decoration:none;font-weight:bold;text-align:center}
+    .btn.card{background:#d4af37;color:#000}
+    .btn.om{background:#ff6600;color:#fff}
+    .btn.wa{background:#1ebe5d;color:#fff}
+    .note{margin-top:18px;font-size:.9rem;color:#aaa}
+    footer{text-align:center;padding:22px;color:#666;border-top:1px solid #222;margin-top:40px}
+    @media(min-width:768px){
+      .hero{grid-template-columns:420px 1fr}
+    }
+  </style>
 </head>
-<body>
-  <header class="header">
-    <div class="brand"><img src="logo.png" alt="PAF Stream"></div>
-    <div class="menu-btn"><span></span><span></span><span></span></div>
-    <nav id="nav-panel" class="nav-panel">
-      <a href="index.html">Accueil</a>
-      <a href="#paiement">Paiement</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>  <main>
-    <section class="hero" style="padding-top:22px">
-      <div class="wrap">
-        <!-- Affiche vidéo / teaser -->
-        <video autoplay muted loop playsinline style="width:100%;border-radius:14px;max-height:420px;object-fit:cover">
-          <source src="genesis-teaser.mp4" type="video/mp4">
-        </video><h1 style="margin-top:14px">Bienvenue sur PAF Stream</h1>
-    <p style="color:var(--muted)">
-      Soutenez le cinéma africain et accédez légalement au film <strong>Genesis</strong>.
-      Après paiement, envoyez la preuve sur WhatsApp pour recevoir le lien privé de visionnage.
-    </p>
+<body><header>
+  <img src="logo.png" alt="PAF Stream">
+</header><main class="container">  <section class="hero"><!-- AFFICHE DU FILM -->
+<div class="poster">
+  <img src="genesis.jpg" alt="GENESIS – Choix Fatal">
+</div>
+
+<!-- CONTENU PRINCIPAL -->
+<div class="content">
+  <span class="tag">Film dramatique africain</span>
+  <h1>GENESIS – Choix Fatal</h1>
+
+  <p>
+    <strong>GENESIS</strong> raconte l’histoire bouleversante d’une jeune femme séduite par
+    l’illusion du luxe et du pouvoir, jusqu’à sa descente tragique dans la folie.
+  </p>
+
+  <p>
+    Née dans une famille modeste mais pieuse, Genesis rêve d’une vie de gloire et
+    d’admiration. Sa beauté et son arrogance attirent l’attention de Roméo, un homme
+    charismatique mais membre d’une secte occulte. Séduite par ses promesses de richesse
+    et d’ascension sociale, Genesis s’engage dans un jeu dangereux où séduction et
+    manipulation deviennent des armes.
+  </p>
+
+  <p>
+    Lorsque Roméo révèle son véritable objectif – sacrifier Genesis pour asseoir son
+    pouvoir – le destin de la jeune femme bascule. Piégée et brisée, elle sombre peu à peu
+    dans la démence, jusqu’à errer dans les rues, prisonnière de sa folie.
+  </p>
+
+  <!-- BOUTONS -->
+  <div class="actions">
+
+    <!-- CARTE INTERNATIONALE -->
+    <a href="#" class="btn card">💳 Payer par carte internationale</a>
+
+    <!-- ORANGE MONEY -->
+    <a href="tel:#150*1*1*689325213*1000%23" class="btn om">🍊 Payer avec Orange Money — 1000 FCFA</a>
+
+    <!-- WHATSAPP -->
+    <a href="https://wa.me/237621721058" target="_blank" class="btn wa">
+      📲 Envoyer la preuve de paiement sur WhatsApp
+    </a>
+
   </div>
-</section>
 
-<section id="paiement" style="padding:22px 0">
-  <div class="wrap">
-    <h2>Accéder au film — 1000 FCFA</h2>
-
-    <!-- Paiement carte internationale -->
-    <div class="card" style="margin-top:14px">
-      <p><strong>💳 Paiement par carte (International)</strong></p>
-      <p style="font-size:1.1em;letter-spacing:1px">4834 5600 6255 1079</p>
-      <p style="color:var(--muted)">Après paiement, envoyez la capture sur WhatsApp.</p>
-    </div>
-
-    <!-- Orange Money -->
-    <div class="card" style="margin-top:14px">
-      <p><strong>🟠 Paiement Orange Money</strong></p>
-      <a href="tel:*150*1*1*689325213*1000%23" class="btn orange" style="margin-top:8px">Payer 1000 FCFA par Orange Money</a>
-    </div>
-
-    <!-- WhatsApp -->
-    <div class="card" style="margin-top:14px">
-      <p><strong>📲 Validation & Accès au film</strong></p>
-      <a href="https://wa.me/237621721058?text=Bonjour%20PAF%20STREAM,%20j'ai%20effectu%C3%A9%20le%20paiement%20pour%20le%20film%20Genesis.%20Voici%20la%20preuve." class="btn whatsapp" style="margin-top:8px">
-        Envoyer la preuve sur WhatsApp
-      </a>
-    </div>
+  <div class="note">
+    🔒 L’accès au film est privé. Après paiement, envoyez la capture de la transaction
+    sur WhatsApp pour recevoir le lien de visionnage.
   </div>
-</section>
+</div>
 
-  </main>  <footer class="footer">© 2025 PAF Stream — Tous droits réservés.</footer>
-</body>
+  </section></main><footer>
+  © 2025 PAF Stream — Tous droits réservés
+</footer></body>
 </html>
