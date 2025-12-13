@@ -2,88 +2,92 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PAF Stream — GENESIS</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body{margin:0;background:#0b0b0b;color:#f2f2f2;font-family:Arial,Helvetica,sans-serif}
-    /* HEADER + MENU */
-    .header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #222}
+  <title>PAF Stream — GENESIS</title>  <!-- STYLE GLOBAL (Netflix-like) -->  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+    body{background:#0b0b0b;color:#fff}
+    a{text-decoration:none;color:inherit}
+
+    /* HEADER */
+    .header{position:fixed;top:0;left:0;width:100%;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(0,0,0,.85);z-index:1000}
     .brand img{height:42px}
-    .menu-btn{cursor:pointer}
-    .menu-btn span{display:block;width:26px;height:3px;background:#fff;margin:5px 0;border-radius:2px}
-    .nav-panel{position:fixed;top:0;right:-100%;width:260px;height:100%;background:#111;padding:60px 20px;transition:.3s;z-index:99}
-    .nav-panel a{display:block;color:#fff;text-decoration:none;padding:12px 0;border-bottom:1px solid #222}
-    .nav-panel.open{right:0}/* PAGE */
-.container{max-width:1000px;margin:auto;padding:24px 16px}
-.hero{display:grid;grid-template-columns:1fr;gap:28px}
-.poster{display:flex;justify-content:center}
-.poster img{width:100%;max-width:420px;border-radius:14px;box-shadow:0 20px 45px rgba(0,0,0,.65)}
-.content h1{font-size:2.3rem;margin:0 0 10px}
-.tag{display:inline-block;background:#d4af37;color:#000;padding:4px 10px;border-radius:20px;font-size:.85rem;margin-bottom:14px}
-.content p{color:#d0d0d0;line-height:1.7}
-.actions{margin-top:26px;display:flex;flex-direction:column;gap:14px}
-.btn{padding:15px;border-radius:10px;text-decoration:none;font-weight:bold;text-align:center}
-.btn.card{background:#d4af37;color:#000}
-.btn.om{background:#ff6600;color:#fff}
-.btn.wa{background:#1ebe5d;color:#fff}
-.note{margin-top:18px;font-size:.9rem;color:#aaa}
-footer{text-align:center;padding:22px;color:#666;border-top:1px solid #222;margin-top:40px}
 
-/* POPUP CARTE */
-.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:100}
-.popup-content{background:#111;padding:22px;border-radius:12px;max-width:340px;width:90%;text-align:center}
-.popup-content h3{margin-top:0}
-.card-number{font-size:1.1rem;letter-spacing:1px;background:#000;padding:10px;border-radius:6px;margin:12px 0}
+    /* BURGER */
+    .menu-btn{width:30px;height:22px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between}
+    .menu-btn span{height:3px;background:#fff;border-radius:2px;transition:.3s}
+    .menu-btn.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .menu-btn.active span:nth-child(2){opacity:0}
+    .menu-btn.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
 
-@media(min-width:768px){
-  .hero{grid-template-columns:420px 1fr}
-}
+    /* MENU PANEL */
+    .nav-panel{position:fixed;top:64px;right:-100%;width:260px;height:calc(100% - 64px);background:#111;padding:20px;transition:.35s}
+    .nav-panel.open{right:0}
+    .nav-panel a{display:block;padding:12px 0;border-bottom:1px solid #222;font-size:1.05em}
 
-  </style>
-</head>
+    .menu-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;z-index:900}
+    .menu-overlay.show{display:block}
+
+    /* HERO */
+    .hero{margin-top:64px;min-height:88vh;background:linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.4)), url('genesis.jpg') center/cover no-repeat;display:flex;align-items:flex-end;padding:40px}
+    .hero-content{max-width:650px}
+    .hero h1{font-size:3em;font-weight:700}
+    .hero p{margin-top:14px;color:#ccc;line-height:1.6}
+
+    /* BUTTONS */
+    .actions{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px}
+    .btn{padding:12px 20px;border-radius:4px;font-weight:600;cursor:pointer;display:inline-block}
+    .btn-pay{background:#e50914}
+    .btn-om{background:#ff7900}
+    .btn-wa{background:#25D366}
+    .btn-card{background:#1f80e0}
+
+    /* SECTION */
+    .section{padding:50px 20px;max-width:1000px;margin:auto}
+    .section h2{margin-bottom:16px;font-size:1.8em}
+    .synopsis{color:#ddd;line-height:1.7;font-size:1.05em}
+
+    footer{text-align:center;padding:20px;color:#777;border-top:1px solid #222}
+  </style></head>
 <body><header class="header">
   <div class="brand"><img src="logo.png" alt="PAF Stream"></div>
-  <div class="menu-btn" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
-</header><nav id="nav" class="nav-panel">
+  <div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
+</header><div class="menu-overlay" id="menuOverlay"></div>
+<nav class="nav-panel" id="nav-panel">
   <a href="index.html">Accueil</a>
-  <a href="#">Catalogue</a>
-  <a href="#">Abonnement</a>
-  <a href="#">Contact</a>
-</nav><main class="container">  <section class="hero"><div class="poster">
-  <img src="genesis.jpg" alt="GENESIS – Choix Fatal">
+  <a href="catalogue.html">Catalogue</a>
+  <a href="abonnement.html">Abonnement</a>
+  <a href="contact.html">Contact</a>
+</nav><!-- HERO --><section class="hero">
+  <div class="hero-content">
+    <h1>GENESIS</h1>
+    <p>Un drame africain puissant sur l'orgueil, la séduction et la chute irréversible d'une jeune femme attirée par l'illusion du luxe.</p><div class="actions">
+  <a class="btn btn-pay" href="#paiement">Payer 1000 FCFA</a>
+  <a class="btn btn-om" href="tel:#150*1*1*689325213*1000#">Orange Money</a>
+  <a class="btn btn-card" href="https://pay.example.com/4834560062551079" target="_blank">Carte bancaire</a>
+  <a class="btn btn-wa" href="https://wa.me/237621721058" target="_blank">WhatsApp</a>
 </div>
 
-<div class="content">
-  <span class="tag">Film dramatique africain</span>
-  <h1>GENESIS – Choix Fatal</h1>
-
-  <p><strong>GENESIS</strong> raconte l’histoire bouleversante d’une jeune femme séduite par l’illusion du luxe et du pouvoir, jusqu’à sa descente tragique dans la folie.</p>
-
-  <p>Séduite par Roméo, membre d’une secte occulte, Genesis s’engage dans un jeu dangereux fait de promesses, de manipulation et d’orgueil. Aveuglée par l’illusion, elle refuse les avertissements de ses proches.</p>
-
-  <p>Lorsque la vérité éclate, son destin bascule. Brisée et humiliée, Genesis sombre dans la démence et disparaît, prisonnière de ses choix.</p>
-
-  <div class="actions">
-    <button class="btn card" onclick="openCard()">💳 Payer par carte internationale</button>
-    <a href="tel:#150*1*1*689325213*1000%23" class="btn om">🍊 Payer avec Orange Money — 1000 FCFA</a>
-    <a href="https://wa.me/237621721058" target="_blank" class="btn wa">📲 Envoyer la preuve sur WhatsApp</a>
   </div>
-
-  <div class="note">🔒 Après paiement, envoyez la capture de la transaction sur WhatsApp pour recevoir l’accès privé au film.</div>
-</div>
-
-  </section></main><footer>© 2025 PAF Stream — Tous droits réservés</footer><!-- POPUP CARTE --><div id="cardPopup" class="popup">
-  <div class="popup-content">
-    <h3>Paiement par carte</h3>
-    <p>Effectuez la transaction puis envoyez la preuve sur WhatsApp.</p>
-    <div class="card-number">4834 5600 6255 1079</div>
-    <button class="btn wa" onclick="closeCard()">Fermer</button>
+</section><!-- SYNOPSIS --><section class="section">
+  <h2>Synopsis</h2>
+  <div class="synopsis">
+    GENESIS raconte l'histoire bouleversante d'une jeune femme séduite par l'illusion du luxe et du pouvoir, jusqu'à sa descente tragique dans la folie.
+    <br><br>
+    Née dans une famille modeste mais pieuse, Genesis rêve de gloire. Sa beauté attire Roméo, membre d'une secte occulte. Aveuglée par les promesses de richesse, elle ignore les avertissements de ses proches.
+    <br><br>
+    Lorsque la vérité éclate, il est déjà trop tard. Brisée, humiliée, Genesis sombre dans la démence et disparaît, prisonnière de ses choix.
   </div>
-</div><script>
-  function toggleMenu(){document.getElementById('nav').classList.toggle('open')}
-  function openCard(){document.getElementById('cardPopup').style.display='flex'}
-  function closeCard(){document.getElementById('cardPopup').style.display='none'}
+</section><footer>© 2025 PAF Stream — Tous droits réservés</footer><script>
+  const menuBtn = document.getElementById('menuBtn');
+  const nav = document.getElementById('nav-panel');
+  const overlay = document.getElementById('menuOverlay');
+
+  function toggleMenu(){
+    menuBtn.classList.toggle('active');
+    nav.classList.toggle('open');
+    overlay.classList.toggle('show');
+  }
+
+  menuBtn.onclick = toggleMenu;
+  overlay.onclick = toggleMenu;
 </script></body>
 </html>
