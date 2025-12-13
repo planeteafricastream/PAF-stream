@@ -120,6 +120,7 @@
 <nav id="nav">
   <a href="#">Accueil</a>
   <a href="#">Catalogue</a>
+  <a href="#about">À propos</a>
   <a href="#">Contact</a>
 </nav>
 <div class="overlay" id="overlay"></div>
@@ -149,18 +150,26 @@
       </p>
 
       <div class="actions">
-        <!-- ORANGE MONEY -->
-        <a href="tel:#150*1*1*689325213*1000%23" class="pay">
+        <a href="tel:%23150*1*1*689325213*1000%23" class="pay">
           Payer via Orange Money (1000 FCFA)
         </a>
 
-        <!-- WHATSAPP -->
         <a 
           href="https://wa.me/237621721058?text=Bonjour%20PAF%20Stream%2C%20j%E2%80%99ai%20effectu%C3%A9%20le%20paiement%20pour%20le%20film%20GENESIS.%20Voici%20la%20capture%20d%E2%80%99%C3%A9cran."
           class="whatsapp">
           Envoyer la capture sur WhatsApp
         </a>
       </div>
+
+      <p style="margin-top:14px;font-size:.85rem;color:var(--muted);line-height:1.5">
+        <strong>Comment accéder au film :</strong><br>
+        1️⃣ Cliquez sur <b>Payer via Orange Money</b><br>
+        2️⃣ Effectuez le paiement (1000 FCFA)<br>
+        3️⃣ Faites une capture d’écran de la transaction<br>
+        4️⃣ Cliquez sur <b>Envoyer la capture sur WhatsApp</b><br>
+        5️⃣ Le lien du film vous sera envoyé automatiquement 🎬
+      </p>
+
     </div>
   </div>
 </section>
@@ -170,6 +179,16 @@
   <p style="max-width:900px;margin:0 auto;color:var(--muted);line-height:1.7">
     GENESIS raconte l’histoire bouleversante d’une jeune femme séduite par
     l’illusion du luxe et du pouvoir, jusqu’à sa descente tragique dans la folie.
+  </p>
+</section>
+
+<section class="section" id="about">
+  <h2 style="text-align:center;margin-bottom:20px">À propos de PAF Stream</h2>
+  <p style="max-width:900px;margin:0 auto;color:var(--muted);line-height:1.7;text-align:center">
+    <strong>PAF Stream</strong> est une plateforme africaine de streaming dédiée à
+    la promotion du cinéma africain.<br><br>
+    En regardant <strong>GENESIS</strong>, vous soutenez directement la création
+    cinématographique africaine.
   </p>
 </section>
 
@@ -190,6 +209,14 @@
 
   btn.addEventListener('click', toggleMenu);
   overlay.addEventListener('click', toggleMenu);
+
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      btn.classList.remove('active');
+      nav.classList.remove('open');
+      overlay.classList.remove('show');
+    });
+  });
 </script>
 
 </body>
