@@ -1,120 +1,174 @@
-<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PAF Stream — Plateforme Africaine de Streaming</title>  <!-- STYLE GLOBAL (Netflix-like) -->  <style>
-    :root{
-      --bg:#0b0b0b;
-      --card:#141414;
-      --text:#ffffff;
-      --muted:#b3b3b3;
-      --accent:#e50914;
-    }
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>PAF Stream — Accueil (version locale)</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="header">
+    <div class="brand"><img src="logo.png" alt="PAF Stream"></div>
+    <div class="menu-btn"><span></span><span></span><span></span></div>
+    <nav id="nav-panel" class="nav-panel">
+      <a href="index.html">Accueil</a>
+      <a href="catalogue.html">Catalogue</a>
+      <a href="abonnement.html">Abonnement</a>
+      <a href="apropos.html">À propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
-    a{text-decoration:none;color:inherit}
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>Vos films, vos histoires, votre Afrique</h1>
+        <p>Bienvenue sur PAF Stream — découvrez vos meilleurs FILMS, série, clip vidéo à streaming ici.</p>
+        <div style="margin-top:10px;">
+          <a href="catalogue.html" class="btn">Voir le catalogue</a>
+          <a href="abonnement.html" class="btn ghost">S'abonner</a>
+        </div>
+      </div>
+    </section>
 
-    /* HEADER */
-    header{
-      position:fixed;top:0;left:0;width:100%;z-index:1000;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 18px;background:rgba(0,0,0,.7);backdrop-filter:blur(6px)
-    }
-    .brand img{height:38px}
+    <section style="padding:18px 0">
+      <div class="search-box">
+        <input id="searchBar" placeholder="🔍 Rechercher  ou Genesis..." />
+      </div>
 
-    /* BURGER */
-    .menu-btn{width:28px;cursor:pointer}
-    .menu-btn span{display:block;height:3px;background:#fff;margin:5px 0;border-radius:2px;transition:.3s}
-    .menu-btn.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-    .menu-btn.active span:nth-child(2){opacity:0}
-    .menu-btn.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
+      <div class="catalogue" id="catalogue">
+        <!-- Genesis -->
+        <div class="film-card" onclick="location.href='genesis.html'">
+          <img src="genesis.jpg" alt="Genesis">
+          <div class="card-body">
+            <h3>Genesis (Film)</h3>
+            <p>Un film émotionnel et puissant.</p>
+            <div class="price">Accès : 1000 FCFA</div>
+            <div style="margin-top:8px"><span class="btn" onclick="event.stopPropagation(); payOrangeMoney('Genesis',1000,'genesis.html')">Payer 1000 FCFA</span></div>
+          </div>
+        </div>
+      </div>
 
-    nav{
-      position:fixed;top:0;right:-260px;width:260px;height:100%;
-      background:#000;padding:20px;transition:.35s
-    }
-    nav.open{right:0}
-    nav a{display:block;padding:12px 0;color:#fff;font-size:16px}
+      <p id="noResult" style="display:none;color:#999;margin-top:14px;text-align:center">Aucun résultat</p>
+    </section>
+  </main>
 
-    .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none}
-    .overlay.show{display:block}
+  <footer class="footer">© 2025 PAF Stream — Tous droits réservés.</footer>
 
-    /* HERO / PRESENTATION */
-    .hero{
-      min-height:100vh;
-      display:flex;align-items:center;justify-content:center;
-      text-align:center;padding:120px 20px 40px;
-      background:linear-gradient(to top, #000 10%, rgba(0,0,0,.4)), url('genesis.jpg') center/cover no-repeat;
-    }
-    .hero h1{font-size:2.2rem;margin-bottom:12px}
-    .hero p{color:var(--muted);max-width:600px;margin:0 auto 20px}
+  <!-- AJOUT PAF STREAM : POPUP EMAIL + CODE ORANGE MONEY -->
+  <div id="omPopup" style="
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.6);display:none;justify-content:center;align-items:center;
+  ">
+    <div style="background:#fff;padding:20px;border-radius:8px;width:90%;max-width:350px;">
+      <h3>Confirmer votre paiement</h3>
+      <p>Saisissez votre email et le code de transaction Orange Money.</p>
 
-    .btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 22px;border-radius:4px;font-weight:bold}
-    .btn.outline{background:none;border:1px solid #fff;margin-left:10px}
+      <input id="omEmail" placeholder="Votre email" style="width:100%;padding:8px;margin-top:8px;">
+      <input id="omCode" placeholder="Code OM reçu (référence)" style="width:100%;padding:8px;margin-top:8px;">
 
-    /* FILM SECTION */
-    .film-section{padding:40px 20px}
-    .film-card{max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;background:var(--card);border-radius:10px;overflow:hidden}
-    .film-card img{width:100%;max-width:360px;object-fit:cover}
-    .film-info{padding:20px;flex:1}
-    .film-info h3{font-size:1.4rem;margin-bottom:10px}
-    .film-info p{color:var(--muted);font-size:.95rem;line-height:1.6}
+      <button onclick="sendConfirmation()" style="margin-top:12px;width:100%;padding:10px;background:#ff6600;color:#fff;border:none;border-radius:5px;">Valider</button>
 
-    .actions{margin-top:20px}
-    .actions a{display:inline-block;margin:6px 6px 0 0;padding:10px 16px;border-radius:4px;font-size:.9rem;background:#222}
-    .actions a.pay{background:var(--accent)}
-    .actions a.whatsapp{background:#25D366;color:#000}
-
-    footer{text-align:center;padding:30px;color:#777;font-size:.85rem}
-  </style></head>
-<body><header>
-  <div class="brand"><img src="logo.png" alt="PAF Stream"></div>
-  <div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
-</header><div class="overlay" id="menuOverlay"></div>
-<nav class="nav-panel" id="nav-panel">
-  <a href="#">Accueil</a>
-  <a href="#">Catalogue</a>
-  <a href="#">Abonnement</a>
-  <a href="#">Contact</a>
-</nav><!-- HERO / PRESENTATION --><section class="hero">
-  <div>
-    <h1>Bienvenue sur PAF Stream</h1>
-    <p>Votre film, votre histoire, votre Afrique. Découvrez un cinéma authentique du continent africain.</p>
-    <a href="#welcome" class="btn">Bienvenue sur PAF Stream</a>
-    <a href="#film" class="btn outline">Découvrez Genesis</a>
+      <p id="omStatus" style="margin-top:10px;color:#444;font-size:0.9em"></p>
+    </div>
   </div>
-</section><!-- FILM GENESIS --><section class="film-section" id="film">
-  <div class="film-card">
-    <img src="genesis.jpg" alt="Genesis">
-    <div class="film-info">
-      <h3>GENESIS (Film)</h3>
-      <p>GENESIS raconte l’histoire bouleversante d’une jeune femme séduite par l’illusion du luxe et du pouvoir,
-      jusqu’à sa descente tragique dans la folie. Découvrez un film émouvant et captivant.</p><div class="actions">
-    <a href="#paiement" class="pay">Payer 1000 FCFA</a>
-    <a href="https://wa.me/237621721058" class="whatsapp">Envoyer la preuve sur WhatsApp</a>
-  </div>
-</div>
 
-  </div>
-</section><!-- SYNOPSIS --><section class="section" id="welcome">
-  <h2>Synopsis de GENESIS</h2>
-  <p>
-    Genesis est une jeune femme ambitieuse, séduite par l’illusion du pouvoir et du luxe, plongée dans un monde de manipulation.
-    De l’arrogance à la folie, elle vit une descente tragique à travers ses propres choix.
-  </p>
-</section><footer>© 2025 PAF Stream — Plateforme Africaine de Streaming</footer><script>
-  const menuBtn = document.getElementById('menuBtn');
-  const nav = document.getElementById('nav-panel');
-  const overlay = document.getElementById('menuOverlay');
+  <!-- AJOUT PAF STREAM : SCRIPT ORANGE MONEY (version compatible GitHub Pages - stockage local) -->
+  <script>
+    let currentFilm = null;
+    let currentPrice = null;
+    let currentRedirect = null;
 
-  function toggleMenu(){
-    menuBtn.classList.toggle('active');
-    nav.classList.toggle('open');
-    overlay.classList.toggle('show');
-  }
+    function payOrangeMoney(film, price, redirect){
+      currentFilm = film;
+      currentPrice = price;
+      currentRedirect = redirect;
 
-  menuBtn.addEventListener('click', toggleMenu);
-  overlay.addEventListener('click', toggleMenu);
-</script></body>
+      // 1) Lancer USSD : *150*1*1*TON_NUMERO*PRIX#
+      // Note: le navigateur mobile va tenter d'ouvrir l'application téléphonie.
+      const ussd = `tel:*150*1*1*689325213*${price}%23`;
+      window.location.href = ussd;
+
+      // 2) Afficher la popup pour email + code OM (l'utilisateur verra la popup après le paiement)
+      setTimeout(()=>{
+        document.getElementById('omPopup').style.display = "flex";
+      }, 3000);
+    }
+
+    // Méthode locale (simple et gratuite) : on enregistre la preuve de paiement côté client (localStorage)
+    // IMPORTANT : cette méthode n'est pas inviolable — c'est une solution rapide pour GitHub Pages.
+    function sendConfirmation(){
+      const email = document.getElementById('omEmail').value.trim();
+      const code = document.getElementById('omCode').value.trim();
+      const status = document.getElementById('omStatus');
+
+      if(!email || !code){
+        status.innerHTML = "Veuillez remplir tous les champs.";
+        return;
+      }
+
+      status.innerHTML = "Confirmation enregistrée...";
+
+      // Récupère l'objet des paiements existants
+      const payments = JSON.parse(localStorage.getItem("paf_payments") || "{}");
+      // Stocke le paiement pour ce film (valeur simple true + métadonnées)
+      payments[currentFilm] = {
+        paid: true,
+        price: currentPrice,
+        email: email,
+        code: code,
+        date: new Date().toISOString()
+      };
+      localStorage.setItem("paf_payments", JSON.stringify(payments));
+
+      // Message à l'utilisateur puis redirection vers la page du film
+      status.innerHTML = "Paiement confirmé ! Accès en cours…";
+
+      setTimeout(()=>{
+        document.getElementById('omPopup').style.display = "none";
+        window.location.href = currentRedirect;
+      }, 1400);
+    }
+
+    // Optionnel : mise à jour des boutons "Payer" si l'utilisateur a déjà payé
+    // (ne change pas la structure HTML, juste le texte du bouton)
+    window.addEventListener('DOMContentLoaded', ()=>{
+      const payments = JSON.parse(localStorage.getItem("paf_payments") || "{}");
+      document.querySelectorAll('.film-card').forEach(card => {
+        const titleEl = card.querySelector('.card-body h3');
+        if(!titleEl) return;
+        const title = titleEl.textContent.trim();
+        const btn = card.querySelector('.card-body .btn');
+        if(payments[title] && btn){
+          btn.textContent = 'Regarder';
+          btn.onclick = (e)=>{ e.stopPropagation(); location.href = card.getAttribute('onclick')?.match(/'([^']+)'/)?.[1] || currentRedirect; };
+        }
+      });
+    });
+  </script>
+
+  <!--
+    NOTE POUR LES PAGES DE FILMS (ex : heritiers.html, genesis.html)
+
+    Ajoute en haut de chaque page film (avant d'afficher l'iframe) ce petit script pour vérifier que l'utilisateur a payé :
+
+    <script>
+      const payments = JSON.parse(localStorage.getItem('paf_payments') || '{}');
+      if(!payments[''] || !payments[''].paid){
+        // redirige vers l'accueil si l'utilisateur n'a pas payé
+        window.location.href = 'index.html';
+      }
+    </script>
+
+    Remplace '' par le titre exact utilisé sur la page catalogue.
+
+    TESTS à effectuer:
+    1) Ouvre index.html sur ton téléphone, clique sur "Payer" -> l'USSD doit s'ouvrir (ou être proposé). Après le paiement, remplis la popup avec email+code.
+    2) Après validation, tu dois être redirigé vers la page du film et pouvoir visionner la vidéo.
+    3) Vérifie dans la console (localStorage) que l'objet "paf_payments" contient les données.
+
+    Quand tu veux évoluer vers une version plus sécurisée (EmailJS, backend, webhook OM), je préparerai l'étape suivante.
+  -->
+
+</body>
 </html>
