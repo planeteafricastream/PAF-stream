@@ -1,174 +1,112 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>PAF Stream — Accueil (version locale)</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PAF Stream — GENESIS</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body{margin:0;background:#0b0b0b;color:#f2f2f2;font-family:Arial,Helvetica,sans-serif}
+    /* HEADER + MENU */
+    .header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #222}
+    .brand img{height:42px}
+    .menu-btn{cursor:pointer}
+    .menu-btn span{display:block;width:26px;height:3px;background:#fff;margin:5px 0;border-radius:2px}
+    .nav-panel{position:fixed;top:0;right:-100%;width:260px;height:100%;background:#111;padding:60px 20px;transition:.3s;z-index:99}
+    .nav-panel a{display:block;color:#fff;text-decoration:none;padding:12px 0;border-bottom:1px solid #222}
+    .nav-panel.open{right:0}
+
+    /* PAGE */
+    .container{max-width:1000px;margin:auto;padding:24px 16px}
+    .hero{display:grid;grid-template-columns:1fr;gap:28px}
+    .poster{display:flex;justify-content:center}
+    .poster img{width:100%;max-width:420px;border-radius:14px;box-shadow:0 20px 45px rgba(0,0,0,.65)}
+    .content h1{font-size:2.3rem;margin:0 0 10px}
+    .tag{display:inline-block;background:#d4af37;color:#000;padding:4px 10px;border-radius:20px;font-size:.85rem;margin-bottom:14px}
+    .content p{color:#d0d0d0;line-height:1.7}
+    .actions{margin-top:26px;display:flex;flex-direction:column;gap:14px}
+    .btn{padding:15px;border-radius:10px;text-decoration:none;font-weight:bold;text-align:center}
+    .btn.card{background:#d4af37;color:#000}
+    .btn.om{background:#ff6600;color:#fff}
+    .btn.wa{background:#1ebe5d;color:#fff}
+    .note{margin-top:18px;font-size:.9rem;color:#aaa}
+    footer{text-align:center;padding:22px;color:#666;border-top:1px solid #222;margin-top:40px}
+
+    /* POPUP CARTE */
+    .popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:100}
+    .popup-content{background:#111;padding:22px;border-radius:12px;max-width:340px;width:90%;text-align:center}
+    .popup-content h3{margin-top:0}
+    .card-number{font-size:1.1rem;letter-spacing:1px;background:#000;padding:10px;border-radius:6px;margin:12px 0}
+
+    @media(min-width:768px){
+      .hero{grid-template-columns:420px 1fr}
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <div class="brand"><img src="logo.png" alt="PAF Stream"></div>
-    <div class="menu-btn"><span></span><span></span><span></span></div>
-    <nav id="nav-panel" class="nav-panel">
-      <a href="index.html">Accueil</a>
-      <a href="catalogue.html">Catalogue</a>
-      <a href="abonnement.html">Abonnement</a>
-      <a href="apropos.html">À propos</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="wrap">
-        <h1>Vos films, vos histoires, votre Afrique</h1>
-        <p>Bienvenue sur PAF Stream — découvrez vos meilleurs FILMS, série, clip vidéo à streaming ici.</p>
-        <div style="margin-top:10px;">
-          <a href="catalogue.html" class="btn">Voir le catalogue</a>
-          <a href="abonnement.html" class="btn ghost">S'abonner</a>
-        </div>
-      </div>
-    </section>
-
-    <section style="padding:18px 0">
-      <div class="search-box">
-        <input id="searchBar" placeholder="🔍 Rechercher  ou Genesis..." />
-      </div>
-
-      <div class="catalogue" id="catalogue">
-        <!-- Genesis -->
-        <div class="film-card" onclick="location.href='genesis.html'">
-          <img src="genesis.jpg" alt="Genesis">
-          <div class="card-body">
-            <h3>Genesis (Film)</h3>
-            <p>Un film émotionnel et puissant.</p>
-            <div class="price">Accès : 1000 FCFA</div>
-            <div style="margin-top:8px"><span class="btn" onclick="event.stopPropagation(); payOrangeMoney('Genesis',1000,'genesis.html')">Payer 1000 FCFA</span></div>
-          </div>
-        </div>
-      </div>
-
-      <p id="noResult" style="display:none;color:#999;margin-top:14px;text-align:center">Aucun résultat</p>
-    </section>
-  </main>
-
-  <footer class="footer">© 2025 PAF Stream — Tous droits réservés.</footer>
-
-  <!-- AJOUT PAF STREAM : POPUP EMAIL + CODE ORANGE MONEY -->
-  <div id="omPopup" style="
-      position:fixed;top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,0.6);display:none;justify-content:center;align-items:center;
-  ">
-    <div style="background:#fff;padding:20px;border-radius:8px;width:90%;max-width:350px;">
-      <h3>Confirmer votre paiement</h3>
-      <p>Saisissez votre email et le code de transaction Orange Money.</p>
-
-      <input id="omEmail" placeholder="Votre email" style="width:100%;padding:8px;margin-top:8px;">
-      <input id="omCode" placeholder="Code OM reçu (référence)" style="width:100%;padding:8px;margin-top:8px;">
-
-      <button onclick="sendConfirmation()" style="margin-top:12px;width:100%;padding:10px;background:#ff6600;color:#fff;border:none;border-radius:5px;">Valider</button>
-
-      <p id="omStatus" style="margin-top:10px;color:#444;font-size:0.9em"></p>
-    </div>
+<header class="header">
+  <div class="brand"><img src="logo.png" alt="PAF Stream"></div>
+  <div class="menu-btn" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
   </div>
+</header>
 
-  <!-- AJOUT PAF STREAM : SCRIPT ORANGE MONEY (version compatible GitHub Pages - stockage local) -->
-  <script>
-    let currentFilm = null;
-    let currentPrice = null;
-    let currentRedirect = null;
+<nav id="nav" class="nav-panel">
+  <a href="index.html">Accueil</a>
+  <a href="#">Catalogue</a>
+  <a href="#">Abonnement</a>
+  <a href="#">Contact</a>
+</nav>
 
-    function payOrangeMoney(film, price, redirect){
-      currentFilm = film;
-      currentPrice = price;
-      currentRedirect = redirect;
+<main class="container">
 
-      // 1) Lancer USSD : *150*1*1*TON_NUMERO*PRIX#
-      // Note: le navigateur mobile va tenter d'ouvrir l'application téléphonie.
-      const ussd = `tel:*150*1*1*689325213*${price}%23`;
-      window.location.href = ussd;
+  <section class="hero">
 
-      // 2) Afficher la popup pour email + code OM (l'utilisateur verra la popup après le paiement)
-      setTimeout(()=>{
-        document.getElementById('omPopup').style.display = "flex";
-      }, 3000);
-    }
+    <div class="poster">
+      <img src="genesis.jpg" alt="GENESIS – Choix Fatal">
+    </div>
 
-    // Méthode locale (simple et gratuite) : on enregistre la preuve de paiement côté client (localStorage)
-    // IMPORTANT : cette méthode n'est pas inviolable — c'est une solution rapide pour GitHub Pages.
-    function sendConfirmation(){
-      const email = document.getElementById('omEmail').value.trim();
-      const code = document.getElementById('omCode').value.trim();
-      const status = document.getElementById('omStatus');
+    <div class="content">
+      <span class="tag">Film dramatique africain</span>
+      <h1>GENESIS – Choix Fatal</h1>
 
-      if(!email || !code){
-        status.innerHTML = "Veuillez remplir tous les champs.";
-        return;
-      }
+      <p><strong>GENESIS</strong> raconte l’histoire bouleversante d’une jeune femme séduite par l’illusion du luxe et du pouvoir, jusqu’à sa descente tragique dans la folie.</p>
 
-      status.innerHTML = "Confirmation enregistrée...";
+      <p>Séduite par Roméo, membre d’une secte occulte, Genesis s’engage dans un jeu dangereux fait de promesses, de manipulation et d’orgueil. Aveuglée par l’illusion, elle refuse les avertissements de ses proches.</p>
 
-      // Récupère l'objet des paiements existants
-      const payments = JSON.parse(localStorage.getItem("paf_payments") || "{}");
-      // Stocke le paiement pour ce film (valeur simple true + métadonnées)
-      payments[currentFilm] = {
-        paid: true,
-        price: currentPrice,
-        email: email,
-        code: code,
-        date: new Date().toISOString()
-      };
-      localStorage.setItem("paf_payments", JSON.stringify(payments));
+      <p>Lorsque la vérité éclate, son destin bascule. Brisée et humiliée, Genesis sombre dans la démence et disparaît, prisonnière de ses choix.</p>
 
-      // Message à l'utilisateur puis redirection vers la page du film
-      status.innerHTML = "Paiement confirmé ! Accès en cours…";
+      <div class="actions">
+        <button class="btn card" onclick="openCard()">💳 Payer par carte internationale</button>
+        <a href="tel:#150*1*1*689325213*1000%23" class="btn om">🍊 Payer avec Orange Money — 1000 FCFA</a>
+        <a href="https://wa.me/237621721058" target="_blank" class="btn wa">📲 Envoyer la preuve sur WhatsApp</a>
+      </div>
 
-      setTimeout(()=>{
-        document.getElementById('omPopup').style.display = "none";
-        window.location.href = currentRedirect;
-      }, 1400);
-    }
+      <div class="note">🔒 Après paiement, envoyez la capture de la transaction sur WhatsApp pour recevoir l’accès privé au film.</div>
+    </div>
 
-    // Optionnel : mise à jour des boutons "Payer" si l'utilisateur a déjà payé
-    // (ne change pas la structure HTML, juste le texte du bouton)
-    window.addEventListener('DOMContentLoaded', ()=>{
-      const payments = JSON.parse(localStorage.getItem("paf_payments") || "{}");
-      document.querySelectorAll('.film-card').forEach(card => {
-        const titleEl = card.querySelector('.card-body h3');
-        if(!titleEl) return;
-        const title = titleEl.textContent.trim();
-        const btn = card.querySelector('.card-body .btn');
-        if(payments[title] && btn){
-          btn.textContent = 'Regarder';
-          btn.onclick = (e)=>{ e.stopPropagation(); location.href = card.getAttribute('onclick')?.match(/'([^']+)'/)?.[1] || currentRedirect; };
-        }
-      });
-    });
-  </script>
+  </section>
 
-  <!--
-    NOTE POUR LES PAGES DE FILMS (ex : heritiers.html, genesis.html)
+</main>
 
-    Ajoute en haut de chaque page film (avant d'afficher l'iframe) ce petit script pour vérifier que l'utilisateur a payé :
+<footer>© 2025 PAF Stream — Tous droits réservés</footer>
 
-    <script>
-      const payments = JSON.parse(localStorage.getItem('paf_payments') || '{}');
-      if(!payments[''] || !payments[''].paid){
-        // redirige vers l'accueil si l'utilisateur n'a pas payé
-        window.location.href = 'index.html';
-      }
-    </script>
+<!-- POPUP CARTE -->
+<div id="cardPopup" class="popup">
+  <div class="popup-content">
+    <h3>Paiement par carte</h3>
+    <p>Effectuez la transaction puis envoyez la preuve sur WhatsApp.</p>
+    <div class="card-number">4834 5600 6255 1079</div>
+    <button class="btn wa" onclick="closeCard()">Fermer</button>
+  </div>
+</div>
 
-    Remplace '' par le titre exact utilisé sur la page catalogue.
-
-    TESTS à effectuer:
-    1) Ouvre index.html sur ton téléphone, clique sur "Payer" -> l'USSD doit s'ouvrir (ou être proposé). Après le paiement, remplis la popup avec email+code.
-    2) Après validation, tu dois être redirigé vers la page du film et pouvoir visionner la vidéo.
-    3) Vérifie dans la console (localStorage) que l'objet "paf_payments" contient les données.
-
-    Quand tu veux évoluer vers une version plus sécurisée (EmailJS, backend, webhook OM), je préparerai l'étape suivante.
-  -->
+<script>
+  function toggleMenu(){document.getElementById('nav').classList.toggle('open')}
+  function openCard(){document.getElementById('cardPopup').style.display='flex'}
+  function closeCard(){document.getElementById('cardPopup').style.display='none'}
+</script>
 
 </body>
 </html>
