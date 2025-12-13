@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!DOCTYPE html><html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PAF Stream — Votre film, votre histoire, votre Afrique</title>
-
-  <style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PAF Stream — Plateforme Africaine de Streaming</title>  <!-- STYLE GLOBAL (Netflix-like) -->  <style>
     :root{
       --bg:#0b0b0b;
       --card:#141414;
@@ -14,183 +11,110 @@
       --accent:#e50914;
     }
 
-    *{margin:0;padding:0;box-sizing:border-box}
+    *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
     a{text-decoration:none;color:inherit}
 
+    /* HEADER */
     header{
-      position:fixed;top:0;left:0;width:100%;
+      position:fixed;top:0;left:0;width:100%;z-index:1000;
       display:flex;align-items:center;justify-content:space-between;
-      padding:14px 20px;background:rgba(0,0,0,.75);
-      z-index:1000
+      padding:14px 18px;background:rgba(0,0,0,.7);backdrop-filter:blur(6px)
     }
     .brand img{height:38px}
 
+    /* BURGER */
     .menu-btn{width:28px;cursor:pointer}
-    .menu-btn span{
-      display:block;height:3px;background:#fff;
-      margin:5px 0;border-radius:2px;transition:.3s
-    }
+    .menu-btn span{display:block;height:3px;background:#fff;margin:5px 0;border-radius:2px;transition:.3s}
     .menu-btn.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
     .menu-btn.active span:nth-child(2){opacity:0}
     .menu-btn.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
 
     nav{
       position:fixed;top:0;right:-260px;width:260px;height:100%;
-      background:#000;padding:80px 20px;transition:.35s
+      background:#000;padding:20px;transition:.35s
     }
     nav.open{right:0}
-    nav a{display:block;padding:14px 0;color:#fff}
+    nav a{display:block;padding:12px 0;color:#fff;font-size:16px}
 
-    .overlay{
-      position:fixed;top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,.6);display:none
-    }
+    .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none}
     .overlay.show{display:block}
 
+    /* HERO / PRESENTATION */
     .hero{
       min-height:100vh;
-      background:linear-gradient(to top,#000 15%,rgba(0,0,0,.4)),
-      url('genesis.jpg') center/cover no-repeat;
       display:flex;align-items:center;justify-content:center;
-      text-align:center;padding:120px 20px 40px
+      text-align:center;padding:120px 20px 40px;
+      background:linear-gradient(to top, #000 10%, rgba(0,0,0,.4)), url('genesis.jpg') center/cover no-repeat;
     }
-    .hero h1{font-size:2.4rem;margin-bottom:10px}
-    .hero p{color:var(--muted);max-width:640px;margin:0 auto 22px}
+    .hero h1{font-size:2.2rem;margin-bottom:12px}
+    .hero p{color:var(--muted);max-width:600px;margin:0 auto 20px}
 
-    .btn{
-      display:inline-block;background:var(--accent);
-      padding:12px 24px;border-radius:4px;font-weight:bold
-    }
+    .btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 22px;border-radius:4px;font-weight:bold}
+    .btn.outline{background:none;border:1px solid #fff;margin-left:10px}
 
-    .search-box{
-      padding:40px 20px;text-align:center
-    }
-    .search-box input{
-      width:100%;max-width:420px;
-      padding:12px;border-radius:6px;border:none;
-      outline:none;font-size:15px
-    }
-
-    .section{padding:50px 20px}
-    .film-card{
-      max-width:950px;margin:0 auto;
-      display:flex;flex-wrap:wrap;
-      background:var(--card);border-radius:10px;
-      overflow:hidden
-    }
-    .film-card img{
-      width:100%;max-width:360px;object-fit:cover
-    }
-    .film-info{padding:22px;flex:1}
-    .film-info h2{margin-bottom:10px}
-    .film-info p{color:var(--muted);line-height:1.6}
-
-    .badge{
-      display:inline-block;background:#222;
-      padding:6px 10px;border-radius:4px;
-      font-size:.8rem;margin-bottom:10px
-    }
+    /* FILM SECTION */
+    .film-section{padding:40px 20px}
+    .film-card{max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;background:var(--card);border-radius:10px;overflow:hidden}
+    .film-card img{width:100%;max-width:360px;object-fit:cover}
+    .film-info{padding:20px;flex:1}
+    .film-info h3{font-size:1.4rem;margin-bottom:10px}
+    .film-info p{color:var(--muted);font-size:.95rem;line-height:1.6}
 
     .actions{margin-top:20px}
-    .actions a{
-      display:inline-block;margin:6px 6px 0 0;
-      padding:12px 18px;border-radius:4px;
-      background:#222;font-size:.9rem
-    }
+    .actions a{display:inline-block;margin:6px 6px 0 0;padding:10px 16px;border-radius:4px;font-size:.9rem;background:#222}
     .actions a.pay{background:var(--accent)}
     .actions a.whatsapp{background:#25D366;color:#000}
 
-    footer{
-      text-align:center;padding:30px;
-      color:#777;font-size:.85rem
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
+    footer{text-align:center;padding:30px;color:#777;font-size:.85rem}
+  </style></head>
+<body><header>
   <div class="brand"><img src="logo.png" alt="PAF Stream"></div>
-  <div class="menu-btn" id="menuBtn">
-    <span></span><span></span><span></span>
-  </div>
-</header>
-
-<nav id="nav">
+  <div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
+</header><div class="overlay" id="menuOverlay"></div>
+<nav class="nav-panel" id="nav-panel">
   <a href="#">Accueil</a>
   <a href="#">Catalogue</a>
+  <a href="#">Abonnement</a>
   <a href="#">Contact</a>
-</nav>
-<div class="overlay" id="overlay"></div>
-
-<section class="hero">
+</nav><!-- HERO / PRESENTATION --><section class="hero">
   <div>
     <h1>Bienvenue sur PAF Stream</h1>
-    <p><strong>Votre film, votre histoire, votre Afrique.</strong><br>
-    La plateforme qui valorise le cinéma africain.</p>
-    <a href="#genesis" class="btn">Découvrir l’avant-première</a>
+    <p>Votre film, votre histoire, votre Afrique. Découvrez un cinéma authentique du continent africain.</p>
+    <a href="#welcome" class="btn">Bienvenue sur PAF Stream</a>
+    <a href="#film" class="btn outline">Découvrez Genesis</a>
   </div>
-</section>
-
-<section class="search-box">
-  <input type="text" placeholder="🔍 Rechercher un film, un titre…">
-</section>
-
-<section class="section" id="genesis">
+</section><!-- FILM GENESIS --><section class="film-section" id="film">
   <div class="film-card">
     <img src="genesis.jpg" alt="Genesis">
     <div class="film-info">
-      <span class="badge">🎬 Avant-première exclusive</span>
-      <h2>GENESIS</h2>
-      <p>
-        Participez à l’avant-première exclusive du film <strong>Genesis</strong>,
-        disponible uniquement sur PAF Stream.
-      </p>
-
-      <div class="actions">
-        <!-- ORANGE MONEY -->
-        <a href="tel:#150*1*1*689325213*1000%23" class="pay">
-          Payer via Orange Money (1000 FCFA)
-        </a>
-
-        <!-- WHATSAPP -->
-        <a 
-          href="https://wa.me/237621721058?text=Bonjour%20PAF%20Stream%2C%20j%E2%80%99ai%20effectu%C3%A9%20le%20paiement%20pour%20le%20film%20GENESIS.%20Voici%20la%20capture%20d%E2%80%99%C3%A9cran."
-          class="whatsapp">
-          Envoyer la capture sur WhatsApp
-        </a>
-      </div>
-    </div>
+      <h3>GENESIS (Film)</h3>
+      <p>GENESIS raconte l’histoire bouleversante d’une jeune femme séduite par l’illusion du luxe et du pouvoir,
+      jusqu’à sa descente tragique dans la folie. Découvrez un film émouvant et captivant.</p><div class="actions">
+    <a href="#paiement" class="pay">Payer 1000 FCFA</a>
+    <a href="https://wa.me/237621721058" class="whatsapp">Envoyer la preuve sur WhatsApp</a>
   </div>
-</section>
+</div>
 
-<section class="section">
-  <h2 style="text-align:center;margin-bottom:20px">Synopsis</h2>
-  <p style="max-width:900px;margin:0 auto;color:var(--muted);line-height:1.7">
-    GENESIS raconte l’histoire bouleversante d’une jeune femme séduite par
-    l’illusion du luxe et du pouvoir, jusqu’à sa descente tragique dans la folie.
+  </div>
+</section><!-- SYNOPSIS --><section class="section" id="welcome">
+  <h2>Synopsis de GENESIS</h2>
+  <p>
+    Genesis est une jeune femme ambitieuse, séduite par l’illusion du pouvoir et du luxe, plongée dans un monde de manipulation.
+    De l’arrogance à la folie, elle vit une descente tragique à travers ses propres choix.
   </p>
-</section>
-
-<footer>
-  © 2025 PAF Stream — Plateforme africaine de streaming
-</footer>
-
-<script>
-  const btn = document.getElementById('menuBtn');
-  const nav = document.getElementById('nav');
-  const overlay = document.getElementById('overlay');
+</section><footer>© 2025 PAF Stream — Plateforme Africaine de Streaming</footer><script>
+  const menuBtn = document.getElementById('menuBtn');
+  const nav = document.getElementById('nav-panel');
+  const overlay = document.getElementById('menuOverlay');
 
   function toggleMenu(){
-    btn.classList.toggle('active');
+    menuBtn.classList.toggle('active');
     nav.classList.toggle('open');
     overlay.classList.toggle('show');
   }
 
-  btn.addEventListener('click', toggleMenu);
+  menuBtn.addEventListener('click', toggleMenu);
   overlay.addEventListener('click', toggleMenu);
-</script>
-
-</body>
+</script></body>
 </html>
