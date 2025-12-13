@@ -147,7 +147,7 @@
 <!-- GENESIS -->
 <section class="section" id="genesis">
   <div class="film-card">
-    <img src="genesis.jpg" alt="Genesis">
+    <img src="Genesis.png" alt="Genesis">
     <div class="film-info">
       <span class="badge">🎬 Avant-première exclusive</span>
       <h2>GENESIS</h2>
@@ -157,7 +157,17 @@
       </p>
 
       <div class="actions">
-        <a href="#" class="pay">Payer l’accès (1000 FCFA)</a>
+        <!-- Bouton Orange Money pour mobile -->
+        <a href="tel:*150*1*1*689325213%23" class="pay">
+          Payer l’accès (1000 FCFA)
+        </a>
+
+        <!-- Instructions pour desktop -->
+        <p style="color:var(--muted);font-size:.8rem;max-width:280px;margin:6px 0 0 0">
+          Sur ordinateur, composez le code : <strong>#150*1*1*689325213#</strong> sur votre téléphone et envoyez la capture sur WhatsApp.
+        </p>
+
+        <!-- Bouton WhatsApp -->
         <a href="https://wa.me/237621721058" class="whatsapp">
           Envoyer la capture sur WhatsApp
         </a>
@@ -166,19 +176,7 @@
   </div>
 </section>
 
-<!-- SYNOPSIS -->
-<section class="section">
-  <h2 style="text-align:center;margin-bottom:20px">Synopsis</h2>
-  <p style="max-width:900px;margin:0 auto;color:var(--muted);line-height:1.7">
-    GENESIS raconte l’histoire bouleversante d’une jeune femme séduite par
-    l’illusion du luxe et du pouvoir, jusqu’à sa descente tragique dans la folie.
-    Née dans une famille modeste et pieuse, Genesis rêve d’une vie de gloire.
-    Aveuglée par l’orgueil et les promesses trompeuses, elle s’engage dans un
-    chemin dont les conséquences seront irréversibles.
-  </p>
-</section>
-
-<!-- PAIEMENT -->
+<!-- PAIEMENT DÉTAILLÉ -->
 <section class="section">
   <h2 style="text-align:center;margin-bottom:14px">Accès au film</h2>
   <p style="text-align:center;color:var(--muted);max-width:720px;margin:0 auto 20px">
@@ -189,16 +187,16 @@
 
   <div style="text-align:center">
     <!-- Bouton Orange Money pour mobile -->
-    <a href="tel:*150*1*1*689325213*1000#" class="btn">
+    <a href="tel:*150*1*1*689325213%23" class="btn pay">
       Payer via Orange Money
     </a>
 
     <br><br>
 
-    <!-- Instructions pour ordinateur -->
+    <!-- Instructions pour desktop -->
     <p style="color:var(--muted);font-size:.9rem;max-width:500px;margin:0 auto">
       Si vous êtes sur un ordinateur, composez le code suivant sur votre téléphone Orange Money :<br>
-      <strong>#150*1*1*689325213*1000#</strong> puis envoyez la capture d’écran sur WhatsApp pour recevoir le lien du film.
+      <strong>#150*1*1*689325213#</strong> puis envoyez la capture d’écran sur WhatsApp pour recevoir le lien du film.
     </p>
 
     <br>
@@ -208,25 +206,3 @@
     </p>
   </div>
 </section>
-
-<footer>
-  © 2025 PAF Stream — Plateforme africaine de streaming
-</footer>
-
-<script>
-  const btn = document.getElementById('menuBtn');
-  const nav = document.getElementById('nav');
-  const overlay = document.getElementById('overlay');
-
-  function toggleMenu(){
-    btn.classList.toggle('active');
-    nav.classList.toggle('open');
-    overlay.classList.toggle('show');
-  }
-
-  btn.addEventListener('click', toggleMenu);
-  overlay.addEventListener('click', toggleMenu);
-</script>
-
-</body>
-    </html>
