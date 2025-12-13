@@ -18,7 +18,6 @@
     body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
     a{text-decoration:none;color:inherit}
 
-    /* HEADER */
     header{
       position:fixed;top:0;left:0;width:100%;
       display:flex;align-items:center;justify-content:space-between;
@@ -27,7 +26,6 @@
     }
     .brand img{height:38px}
 
-    /* MENU BURGER */
     .menu-btn{width:28px;cursor:pointer}
     .menu-btn span{
       display:block;height:3px;background:#fff;
@@ -50,7 +48,6 @@
     }
     .overlay.show{display:block}
 
-    /* HERO */
     .hero{
       min-height:100vh;
       background:linear-gradient(to top,#000 15%,rgba(0,0,0,.4)),
@@ -66,7 +63,6 @@
       padding:12px 24px;border-radius:4px;font-weight:bold
     }
 
-    /* SEARCH */
     .search-box{
       padding:40px 20px;text-align:center
     }
@@ -76,7 +72,6 @@
       outline:none;font-size:15px
     }
 
-    /* FILM CARD */
     .section{padding:50px 20px}
     .film-card{
       max-width:950px;margin:0 auto;
@@ -129,22 +124,19 @@
 </nav>
 <div class="overlay" id="overlay"></div>
 
-<!-- ACCUEIL -->
 <section class="hero">
   <div>
     <h1>Bienvenue sur PAF Stream</h1>
     <p><strong>Votre film, votre histoire, votre Afrique.</strong><br>
-    Découvrez et soutenez le cinéma africain à travers des œuvres authentiques.</p>
+    La plateforme qui valorise le cinéma africain.</p>
     <a href="#genesis" class="btn">Découvrir l’avant-première</a>
   </div>
 </section>
 
-<!-- RECHERCHE -->
 <section class="search-box">
   <input type="text" placeholder="🔍 Rechercher un film, un titre…">
 </section>
 
-<!-- GENESIS -->
 <section class="section" id="genesis">
   <div class="film-card">
     <img src="genesis.jpg" alt="Genesis">
@@ -153,12 +145,19 @@
       <h2>GENESIS</h2>
       <p>
         Participez à l’avant-première exclusive du film <strong>Genesis</strong>,
-        une œuvre poignante du cinéma africain disponible uniquement sur PAF Stream.
+        disponible uniquement sur PAF Stream.
       </p>
 
       <div class="actions">
-        <a href="#" class="pay">Payer l’accès (1000 FCFA)</a>
-        <a href="https://wa.me/237621721058" class="whatsapp">
+        <!-- ORANGE MONEY -->
+        <a href="tel:#150*1*1*689325213*1000%23" class="pay">
+          Payer via Orange Money (1000 FCFA)
+        </a>
+
+        <!-- WHATSAPP -->
+        <a 
+          href="https://wa.me/237621721058?text=Bonjour%20PAF%20Stream%2C%20j%E2%80%99ai%20effectu%C3%A9%20le%20paiement%20pour%20le%20film%20GENESIS.%20Voici%20la%20capture%20d%E2%80%99%C3%A9cran."
+          class="whatsapp">
           Envoyer la capture sur WhatsApp
         </a>
       </div>
@@ -166,34 +165,12 @@
   </div>
 </section>
 
-<!-- SYNOPSIS -->
 <section class="section">
   <h2 style="text-align:center;margin-bottom:20px">Synopsis</h2>
   <p style="max-width:900px;margin:0 auto;color:var(--muted);line-height:1.7">
     GENESIS raconte l’histoire bouleversante d’une jeune femme séduite par
     l’illusion du luxe et du pouvoir, jusqu’à sa descente tragique dans la folie.
-    Née dans une famille modeste et pieuse, Genesis rêve d’une vie de gloire.
-    Aveuglée par l’orgueil et les promesses trompeuses, elle s’engage dans un
-    chemin dont les conséquences seront irréversibles.
   </p>
-</section>
-
-<!-- PAIEMENT -->
-<section class="section">
-  <h2 style="text-align:center;margin-bottom:14px">Accès au film</h2>
-  <p style="text-align:center;color:var(--muted);max-width:720px;margin:0 auto 20px">
-    Pour accéder au film <strong>Genesis</strong>, veuillez effectuer votre paiement.
-    Après la transaction, envoyez une capture d’écran sur WhatsApp afin de recevoir
-    le lien privé de visionnage.
-  </p>
-
-  <div style="text-align:center">
-    <a href="#" class="btn">Payer via Orange Money</a>
-    <br><br>
-    <p style="color:#777;font-size:.85rem">
-      Paiement carte internationale disponible sur demande
-    </p>
-  </div>
 </section>
 
 <footer>
