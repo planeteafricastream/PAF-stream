@@ -165,8 +165,6 @@ footer{
   <a href="#">Clips vidéo</a>
   <a href="#about">À propos</a>
   <a href="#contact">Contact</a>
-  <!-- ✅ CORRECTION ICI -->
-  <a href="#" onclick="logout(); return false;">Déconnexion</a>
 </nav>
 
 <div class="overlay" id="overlay"></div>
@@ -179,13 +177,13 @@ footer{
 </section>
 
 <section class="section" id="film">
-  <h2>🎬 Avant-première exclusive</h2>
+  <h2>🎬 Avant-première exclusive premium</h2>
 
   <div class="card">
     <img src="genesis.jpg" alt="Genesis">
 
     <div class="card-content">
-      <h3>GENESIS — Film de Venceslas Guedbigué</h3>
+      <h3>GENESIS — Film réalisé par Venceslas Guedbigué</h3>
 
       <p><strong>Synopsis :</strong><br>
       GENESIS raconte l’histoire bouleversante d’une jeune femme séduite par
@@ -250,10 +248,10 @@ overlay.onclick=()=>{
 };
 </script>
 
-<!-- 🔐 FIREBASE -->
+<!-- 🔐 PROTECTION FIREBASE AUTOMATIQUE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } 
+import { getAuth, onAuthStateChanged } 
 from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -268,19 +266,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-/* Protection du mur */
+/* 🔒 Accès autorisé uniquement si connecté */
 onAuthStateChanged(auth, user => {
   if (!user) {
     window.location.replace("login.html");
   }
 });
-
-/* Déconnexion */
-window.logout = function(){
-  signOut(auth).then(() => {
-    window.location.replace("login.html");
-  });
-}
 </script>
 
 </body>
