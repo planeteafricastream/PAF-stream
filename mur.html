@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAF Stream — Accueil</title>
+
+<style>
+:root{
+  --bg:#0b0b0b;
+  --card:#141414;
+  --text:#ffffff;
+  --muted:#b3b3b3;
+  --accent:#e50914;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+header{
+  padding:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+header img{height:45px}
+
+.hero{
+  height:60vh;
+  background:
+    linear-gradient(to top,#000 10%,rgba(0,0,0,.4)),
+    url('genesis.jpg') center/cover no-repeat;
+  display:flex;
+  align-items:flex-end;
+  padding:40px;
+}
+
+.hero h1{font-size:3rem}
+.hero p{max-width:500px;color:var(--muted)}
+
+.section{
+  padding:40px 20px;
+}
+
+.section h2{
+  margin-bottom:20px;
+}
+
+.row{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+}
+
+.card{
+  min-width:220px;
+  background:var(--card);
+  border-radius:8px;
+  overflow:hidden;
+}
+
+.card img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+}
+
+.card-content{
+  padding:12px;
+}
+
+.card-content h3{
+  font-size:1rem;
+  margin-bottom:6px;
+}
+
+.card-content p{
+  font-size:.85rem;
+  color:var(--muted);
+}
+
+.actions{
+  margin-top:10px;
+}
+
+.actions a{
+  display:inline-block;
+  margin-top:6px;
+  padding:8px 12px;
+  background:#222;
+  border-radius:4px;
+  font-size:.8rem;
+}
+
+.actions a.pay{
+  background:var(--accent);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="logo.png" alt="PAF Stream">
+</header>
+
+<section class="hero">
+  <div>
+    <h1>GENESIS</h1>
+    <p>Avant-première exclusive disponible sur PAF Stream</p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🎬 Films & Séries</h2>
+  <div class="row">
+
+    <div class="card">
+      <img src="genesis.jpg" alt="Genesis">
+      <div class="card-content">
+        <h3>GENESIS</h3>
+        <p>Film exclusif Planète Africa.</p>
+
+        <div class="actions">
+
+  <!-- ORANGE MONEY -->
+  <a href="tel:%23150*1*1*689325213%23" class="pay">
+    🍊 Payer via Orange Money (1000 FCFA)
+  </a>
+
+  <!-- MTN MOBILE MONEY -->
+  <a href="tel:*126*1*1*673807285#" class="pay">
+    📱 Payer via MTN Mobile Money (1000 FCFA)
+  </a>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/237621721058" class="whatsapp">
+    Merci de bien vouloir envoyer la capture sur WhatsApp pour recevoir le lien du film en privé 
+  </a>
+
+        </div>
+          <a href="https://wa.me/237621721058">
+            Envoyer la capture sur WhatsApp
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <h2>🎵 Clips vidéo</h2>
+  <div class="row">
+
+    <div class="card">
+      <img src="genesis.jpg" alt="Clip">
+      <div class="card-content">
+        <h3>Clip à venir</h3>
+        <p>Disponible bientôt sur PAF Stream</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
