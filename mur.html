@@ -168,6 +168,7 @@ footer{
   <a href="#">Clips vidéo</a>
   <a href="#about">À propos</a>
   <a href="#contact">Contact</a>
+  <a href="#" onclick="logout()">Déconnexion</a>
 </nav>
 
 <div class="overlay" id="overlay"></div>
@@ -255,5 +256,38 @@ overlay.onclick=()=>{
 };
 </script>
 
+<!-- 🔐 FIREBASE PROTECTION -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } 
+from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBwABBsB1Sn1LU1CjCQpadHEz6tnebVLVY",
+  authDomain: "paf-stream-web.firebaseapp.com",
+  projectId: "paf-stream-web",
+  storageBucket: "paf-stream-web.appspot.com",
+  messagingSenderId: "368490377612",
+  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+/* Protection du mur */
+onAuthStateChanged(auth, user => {
+  if (!user) {
+    window.location.href = "login.html";
+  }
+});
+
+/* Déconnexion */
+window.logout = () => {
+  signOut(auth).then(() => {
+    window.location.href = "login.html";
+  });
+};
+</script>
+
 </body>
-  </html>
+</html>
