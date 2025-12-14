@@ -1,54 +1,116 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Connexion | PAF Stream</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Connexion • PAF Stream</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#000,#1a1a1a);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.card {
+  background:#111;
+  width:360px;
+  padding:30px;
+  border-radius:14px;
+  text-align:center;
+}
+.logo {
+  width:120px;
+  margin-bottom:15px;
+}
+input {
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+  border-radius:8px;
+  border:none;
+}
+button {
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+}
+.main {
+  background:#e50914;
+  color:white;
+}
+.google {
+  background:white;
+  color:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+.google img { width:20px; }
+.link { margin-top:15px; font-size:14px; }
+a { color:#e50914; text-decoration:none; }
+</style>
 </head>
+
 <body>
 
-<div class="container">
-  <!-- LOGO -->
-  <img src="logo.png" class="logo" alt="PAF Stream">
-
+<div class="card">
+  <img src="logo.png" class="logo">
   <h2>Connexion</h2>
 
   <input type="email" id="email" placeholder="Email">
   <input type="password" id="password" placeholder="Mot de passe">
 
-  <button id="loginBtn">Se connecter</button>
+  <button class="main" onclick="login()">Se connecter</button>
 
-  <p>Pas de compte ? <a href="inscription.html">S’inscrire</a></p>
+  <p>OU</p>
 
-  <!-- GOOGLE -->
-  <div class="google-box">
-    <button id="googleLogin">
-      <img src="https://www.svgrepo.com/show/475656/google-color.svg">
-      Continuer avec Google
-    </button>
+  <button class="google" onclick="loginGoogle()">
+    <img src="https://www.svgrepo.com/show/475656/google-color.svg">
+    Continuer avec Google
+  </button>
+
+  <div class="link">
+    Pas de compte ? <a href="register.html">S'inscrire</a>
   </div>
 </div>
 
 <script type="module">
-  import { auth, provider } from "./firebase.js";
-  import { signInWithEmailAndPassword, signInWithPopup } from
-  "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup }
+from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
-  document.getElementById("loginBtn").onclick = () => {
-    signInWithEmailAndPassword(
-      auth,
-      email.value,
-      password.value
-    ).then(() => {
-      alert("Connexion réussie");
-    }).catch(e => alert(e.message));
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyBwABBsB1Sn1LU1CjCQpadHEz6tnebVLVY",
+  authDomain: "paf-stream-web.firebaseapp.com",
+  projectId: "paf-stream-web",
+  storageBucket: "paf-stream-web.appspot.com",
+  messagingSenderId: "368490377612",
+  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9"
+};
 
-  document.getElementById("googleLogin").onclick = () => {
-    signInWithPopup(auth, provider)
-      .then(() => alert("Connexion Google réussie"))
-      .catch(e => alert(e.message));
-  };
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+window.login = () => {
+  signInWithEmailAndPassword(auth, email.value, password.value)
+    .then(()=> alert("Connexion réussie"))
+    .catch(e => alert(e.message));
+};
+
+window.loginGoogle = () => {
+  signInWithPopup(auth, provider)
+    .then(()=> alert("Connexion Google réussie"))
+    .catch(e => alert(e.message));
+};
 </script>
 
 </body>
