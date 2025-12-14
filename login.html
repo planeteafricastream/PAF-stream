@@ -3,177 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PAF Stream — Votre film, votre histoire, votre Afrique</title>
-
+  <title>Connexion - PAF Stream</title>
   <style>
-    :root{
-      --bg:#000;
-      --text:#fff;
-      --muted:#b3b3b3;
-      --accent:#e50914;
+    body {
+      background-color: #0b0b0b;
+      font-family: Arial, sans-serif;
+      color: #fff;
     }
-
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:Arial,Helvetica,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      overflow-x:hidden;
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 8px;
     }
-
-    /* HEADER */
-    header{
-      position:fixed;
-      top:0;left:0;
-      width:100%;
-      padding:16px 30px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      background:linear-gradient(to bottom,rgba(0,0,0,.8),transparent);
-      z-index:10;
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
     }
-    header img{height:48px}
-
-    /* HERO */
-    .hero{
-      position:relative;
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:120px 20px;
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background-color: #222;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
     }
-
-    /* BACKGROUND ANIMÉ (NETFLIX STYLE) */
-    .background{
-      position:absolute;
-      top:0;left:0;
-      width:100%;
-      height:100%;
-      overflow:hidden;
-      z-index:-2;
+    .btn-submit {
+      background-color: #e50914;
+      color: #fff;
+      font-weight: bold;
+      padding: 12px 30px;
+      border-radius: 6px;
+      width: 100%;
+      border: none;
+      cursor: pointer;
     }
-
-    .background-track{
-      display:flex;
-      width:200%;
-      height:100%;
-      animation: scroll 40s linear infinite;
-    }
-
-    .background-track img{
-      width:16.66%;
-      height:100%;
-      object-fit:cover;
-      filter:brightness(0.5);
-    }
-
-    @keyframes scroll{
-      0%{transform:translateX(0)}
-      100%{transform:translateX(-50%)}
-    }
-
-    /* OVERLAY */
-    .overlay{
-      position:absolute;
-      top:0;left:0;
-      width:100%;
-      height:100%;
-      background:linear-gradient(
-        to top,
-        rgba(0,0,0,0.9),
-        rgba(0,0,0,0.4),
-        rgba(0,0,0,0.9)
-      );
-      z-index:-1;
-    }
-
-    /* CONTENU */
-    .content{
-      max-width:900px;
-    }
-
-    .content h1{
-      font-size:3rem;
-      margin-bottom:14px;
-    }
-
-    .content p{
-      font-size:1.2rem;
-      color:var(--muted);
-      margin-bottom:28px;
-      line-height:1.6;
-    }
-
-    .btn{
-      display:inline-block;
-      background:var(--accent);
-      color:#fff;
-      padding:16px 36px;
-      border-radius:6px;
-      font-size:1.1rem;
-      font-weight:bold;
-      text-decoration:none;
-      transition:.3s;
-    }
-
-    .btn:hover{
-      background:#b20710;
-      transform:scale(1.05);
-    }
-
-    /* RESPONSIVE */
-    @media(max-width:768px){
-      .content h1{font-size:2.2rem}
-      .content p{font-size:1rem}
+    .btn-submit:hover {
+      background-color: #c20811;
     }
   </style>
 </head>
-
 <body>
-
-<header>
-  <img src="logo.png" alt="PAF Stream">
-</header>
-
-<section class="hero">
-
-  <!-- BACKGROUND ANIMÉ -->
-  <div class="background">
-    <div class="background-track">
-      <!-- Tu peux remplacer ces images -->
-      <img src="affiche1.jpg">
-      <img src="affiche2.jpg">
-      <img src="affiche3.jpg">
-      <img src="affiche4.jpg">
-      <img src="affiche5.jpg">
-      <img src="affiche6.jpg">
-
-      <!-- duplication pour animation fluide -->
-      <img src="affiche1.jpg">
-      <img src="affiche2.jpg">
-      <img src="affiche3.jpg">
-      <img src="affiche4.jpg">
-      <img src="affiche5.jpg">
-      <img src="affiche6.jpg">
-    </div>
+  <div class="container">
+    <h2>Connexion à PAF Stream</h2>
+    <form>
+      <input type="email" class="form-input" placeholder="Email" required>
+      <input type="password" class="form-input" placeholder="Mot de passe" required>
+      <button type="submit" class="btn-submit">Se connecter</button>
+    </form>
   </div>
-
-  <div class="overlay"></div>
-
-  <!-- CONTENU -->
-  <div class="content">
-    <h1>BIENVENUE SUR PAF STREAM</h1>
-    <p>
-      La plateforme africaine qui valorise les films, séries et clips vidéo.
-      Découvrez, soutenez et consommez la création africaine autrement.
-    </p>
-    <a href="connexion.html" class="btn">Commencer</a>
-  </div>
-
-</section>
-
 </body>
 </html>
