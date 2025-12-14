@@ -2,111 +2,179 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Connexion • PAF Stream</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connexion — PAF Stream</title>
 
 <style>
-body {
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#000,#1a1a1a);
+:root{
+  --bg:#0b0b0b;
+  --card:#141414;
+  --text:#ffffff;
+  --muted:#b3b3b3;
+  --accent:#e50914;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
   min-height:100vh;
+  background:var(--bg);
   display:flex;
   justify-content:center;
   align-items:center;
-  color:white;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
 }
-.card {
-  width:90%;
+
+.container{
+  width:100%;
   max-width:420px;
-  background:#111;
-  padding:30px;
-  border-radius:18px;
+  background:var(--card);
+  padding:36px;
+  border-radius:10px;
   text-align:center;
 }
-.logo { width:140px; margin-bottom:15px; }
-input {
+
+.logo{
+  margin-bottom:20px;
+}
+
+.logo img{
+  height:50px;
+}
+
+h1{
+  margin-bottom:6px;
+}
+
+p{
+  color:var(--muted);
+  margin-bottom:24px;
+}
+
+input{
   width:100%;
   padding:14px;
   margin-bottom:14px;
-  border-radius:10px;
   border:none;
+  border-radius:6px;
+  font-size:1rem;
 }
-button {
+
+button{
   width:100%;
   padding:14px;
   border:none;
-  border-radius:10px;
-  font-size:16px;
+  border-radius:6px;
+  background:var(--accent);
+  color:#fff;
+  font-weight:bold;
   cursor:pointer;
+  font-size:1rem;
 }
-.main { background:#e50914; color:white; }
-.google {
-  background:white;
-  color:black;
+
+button:hover{opacity:.9}
+
+.or{
+  margin:18px 0;
+  color:var(--muted);
+}
+
+.google-btn{
+  background:#fff;
+  color:#000;
   display:flex;
   align-items:center;
   justify-content:center;
   gap:10px;
 }
-.google img { width:20px; }
-a { color:#e50914; text-decoration:none; }
+
+.google-btn img{
+  width:20px;
+}
+
+.bottom{
+  margin-top:18px;
+  font-size:.9rem;
+}
+
+.bottom a{
+  color:var(--accent);
+  font-weight:bold;
+  text-decoration:none;
+}
 </style>
 </head>
 
 <body>
-<div class="card">
-  <img src="logo.png" class="logo" alt="PAF Stream">
 
-  <h2>Connexion</h2>
-  <p>Accède à PAF Stream</p>
+<div class="container">
+  <div class="logo">
+    <img src="logo.png" alt="PAF Stream">
+  </div>
 
-  <input id="email" type="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Mot de passe">
+  <h1>Connexion</h1>
+  <p>Accédez à PAF Stream</p>
 
-  <button class="main" onclick="login()">Se connecter</button>
+  <input type="email" id="email" placeholder="Adresse email">
+  <input type="password" id="password" placeholder="Mot de passe">
 
-  <p>OU</p>
+  <button onclick="login()">Se connecter</button>
 
-  <button class="google" onclick="loginGoogle()">
-    <img src="https://www.svgrepo.com/show/475656/google-color.svg">
+  <div class="or">OU</div>
+
+  <button class="google-btn" onclick="loginGoogle()">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
     Continuer avec Google
   </button>
 
-  <p style="margin-top:15px;">
-    Pas de compte ? <a href="register.html">Inscription</a>
-  </p>
+  <div class="bottom">
+    Pas encore de compte ?
+    <a href="register.html">Inscription</a>
+  </div>
 </div>
 
+<!-- FIREBASE -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } 
-from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBwABBsB1Sn1LU1CjCQpadHEz6tnebVLVY",
   authDomain: "paf-stream-web.firebaseapp.com",
   projectId: "paf-stream-web",
-  storageBucket: "paf-stream-web.appspot.com",
+  storageBucket: "paf-stream-web.firebasestorage.app",
   messagingSenderId: "368490377612",
-  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9"
+  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9",
+  measurementId: "G-9TJP9ML7ZG"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-window.login = () => {
-  signInWithEmailAndPassword(auth, email.value, password.value)
-    .then(() => window.location.href = "dashboard.html")
-    .catch(err => alert(err.message));
-};
+/* EMAIL LOGIN */
+window.login = function(){
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-window.loginGoogle = () => {
-  signInWithPopup(auth, provider)
-    .then(() => window.location.href = "dashboard.html")
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      window.location.replace("mur.html");
+    })
     .catch(err => alert(err.message));
-};
+}
+
+/* GOOGLE LOGIN */
+window.loginGoogle = function(){
+  signInWithPopup(auth, provider)
+    .then(() => {
+      window.location.replace("mur.html");
+    })
+    .catch(err => alert(err.message));
+}
 </script>
+
 </body>
 </html>
