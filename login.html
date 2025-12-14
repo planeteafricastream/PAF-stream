@@ -53,8 +53,6 @@
       font-size:1rem;
     }
 
-    input::placeholder{color:#888}
-
     button{
       width:100%;
       padding:14px;
@@ -69,10 +67,10 @@
 
     button:hover{opacity:.9}
 
-    p{
-      margin-top:16px;
+    .error{
+      margin-top:14px;
+      color:#ff6b6b;
       font-size:.85rem;
-      color:var(--muted);
       text-align:center;
     }
 
@@ -88,18 +86,62 @@
 <div class="login-box">
   <h1>Connexion à PAF Stream</h1>
 
-  <form action="mur.html">
-    <input type="email" placeholder="Adresse e-mail" required>
-    <input type="password" placeholder="Mot de passe" required>
-    <input type="password" placeholder="Confirmer le mot de passe" required>
+  <input type="email" id="email" placeholder="Adresse e-mail" required>
+  <input type="password" id="password" placeholder="Mot de passe" required>
 
-    <button type="submit">Se connecter</button>
-  </form>
+  <button id="loginBtn">Se connecter / S'inscrire</button>
 
-  <p>
-    En vous connectant, vous acceptez les conditions de PAF Stream
-  </p>
+  <div class="error" id="error"></div>
 </div>
+
+<!-- 🔥 FIREBASE AUTH -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword
+  } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBwABBsB1Sn1LU1CjCQpadHEz6tnebVLVY",
+    authDomain: "paf-stream-web.firebaseapp.com",
+    projectId: "paf-stream-web",
+    storageBucket: "paf-stream-web.firebasestorage.app",
+    messagingSenderId: "368490377612",
+    appId: "1:368490377612:web:e6ebabae0a0453c0f326a9"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+  const errorBox = document.getElementById("error");
+
+  document.getElementById("loginBtn").addEventListener("click", async () => {
+    errorBox.textContent = "";
+
+    try {
+      // Tentative de connexion
+      await signInWithEmailAndPassword(auth, email.value, password.value);
+      window.location.href = "mur.html";
+
+    } catch (error) {
+      // Si l'utilisateur n'existe pas → création du compte
+      if (error.code === "auth/user-not-found") {
+        try {
+          await createUserWithEmailAndPassword(auth, email.value, password.value);
+          window.location.href = "mur.html";
+        } catch (e) {
+          errorBox.textContent = e.message;
+        }
+      } else {
+        errorBox.textContent = error.message;
+      }
+    }
+  });
+</script>
 
 </body>
 </html>
