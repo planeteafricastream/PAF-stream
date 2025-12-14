@@ -15,6 +15,7 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
   font-family:Arial,Helvetica,sans-serif;
   background:var(--bg);
@@ -28,49 +29,43 @@ header{
   position:fixed;
   top:0;left:0;
   width:100%;
+  padding:14px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:14px 20px;
   background:rgba(0,0,0,.8);
   z-index:1000;
 }
 
-header img{height:42px}
+header img{height:40px}
 
 /* MENU BURGER */
 .menu-btn{width:28px;cursor:pointer}
 .menu-btn span{
-  display:block;
-  height:3px;
-  background:#fff;
-  margin:5px 0;
-  transition:.3s;
+  display:block;height:3px;background:#fff;
+  margin:5px 0;border-radius:2px
 }
-
-.menu-btn.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.menu-btn.active span:nth-child(2){opacity:0}
-.menu-btn.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
 
 nav{
   position:fixed;
-  top:0;right:-260px;
+  right:-260px;top:0;
   width:260px;height:100%;
   background:#000;
   padding:80px 20px;
   transition:.3s;
 }
+
 nav.open{right:0}
+
 nav a{
   display:block;
   padding:14px 0;
-  color:#fff;
+  border-bottom:1px solid #222;
 }
 
 .overlay{
   position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  inset:0;
   background:rgba(0,0,0,.6);
   display:none;
 }
@@ -78,24 +73,23 @@ nav a{
 
 /* HERO */
 .hero{
-  margin-top:70px;
-  height:60vh;
+  min-height:70vh;
   background:
-    linear-gradient(to top,#000 20%,rgba(0,0,0,.4)),
+    linear-gradient(to top,#000 15%,rgba(0,0,0,.4)),
     url("genesis.jpg") center/cover no-repeat;
+  padding:120px 30px 40px;
   display:flex;
   align-items:flex-end;
-  padding:40px;
 }
 
 .hero h1{font-size:3rem}
-.hero p{color:var(--muted)}
+.hero p{color:var(--muted);max-width:600px}
 
 /* SECTIONS */
-.section{padding:40px 20px}
+.section{padding:50px 20px}
 .section h2{margin-bottom:20px}
 
-/* FILM CARD */
+/* CARD */
 .card{
   max-width:900px;
   margin:auto;
@@ -104,22 +98,10 @@ nav a{
   overflow:hidden;
 }
 
-.card img{
-  width:100%;
-  max-height:420px;
-  object-fit:cover;
-}
+.card img{width:100%}
 
-.card-content{padding:20px}
-
-.badge{
-  display:inline-block;
-  background:#222;
-  padding:6px 10px;
-  border-radius:4px;
-  font-size:.8rem;
-  margin-bottom:10px;
-}
+.card-content{padding:24px}
+.card-content h3{margin-bottom:10px}
 
 .card-content p{
   color:var(--muted);
@@ -127,23 +109,10 @@ nav a{
   margin-bottom:14px;
 }
 
-/* PROCESS */
-.process{
-  background:#111;
-  padding:20px;
-  border-radius:8px;
-  margin:20px 0;
-}
-
-.process li{
-  margin-bottom:10px;
-  color:#ddd;
-}
-
 /* ACTIONS */
 .actions a{
   display:block;
-  margin-top:10px;
+  margin:10px 0;
   padding:14px;
   border-radius:6px;
   font-weight:bold;
@@ -153,16 +122,34 @@ nav a{
 .pay{background:var(--accent)}
 .whatsapp{background:#25D366;color:#000}
 
+/* CONTACT */
+.contact{
+  text-align:center;
+}
+
+.contact a{
+  display:inline-block;
+  margin:10px;
+  padding:12px 22px;
+  border-radius:6px;
+  font-weight:bold;
+}
+
+.email{background:#222}
+.wa{background:#25D366;color:#000}
+
 /* FOOTER */
 footer{
-  margin-top:40px;
-  background:#000;
-  padding:30px 20px;
   text-align:center;
+  padding:30px;
   color:#777;
-  font-size:.9rem;
+  font-size:.85rem;
 }
-footer a{color:#25D366}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero h1{font-size:2.2rem}
+}
 </style>
 </head>
 
@@ -177,8 +164,9 @@ footer a{color:#25D366}
 
 <nav id="nav">
   <a href="#">Accueil</a>
-  <a href="#">Films</a>
-  <a href="#">Clips</a>
+  <a href="#film">Films</a>
+  <a href="#">Clips vidéo</a>
+  <a href="#about">À propos</a>
   <a href="#contact">Contact</a>
 </nav>
 
@@ -187,32 +175,32 @@ footer a{color:#25D366}
 <section class="hero">
   <div>
     <h1>GENESIS</h1>
-    <p>Avant-première exclusive sur PAF Stream</p>
+    <p>Avant-première exclusive PAF Stream</p>
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="film">
+  <h2>🎬 Avant-première exclusive</h2>
+
   <div class="card">
     <img src="genesis.jpg" alt="Genesis">
 
     <div class="card-content">
-      <span class="badge">🎬 Avant-première Premium</span>
+      <h3>GENESIS — Film de Venceslas Guedbigué</h3>
 
-      <h2>Synopsis</h2>
-      <p>
-        <strong>GENESIS</strong> raconte l’histoire bouleversante d’une jeune femme
-        séduite par l’illusion du luxe et du pouvoir,
-        jusqu’à sa descente tragique dans la folie.
+      <p><strong>Synopsis :</strong><br>
+      GENESIS raconte l’histoire bouleversante d’une jeune femme séduite par
+      l’illusion du luxe et du pouvoir, jusqu’à sa descente tragique dans la folie.
       </p>
 
-      <h3>🎟️ Comment avoir accès au film ?</h3>
-      <ul class="process">
-        <li>1️⃣ Effectuez le paiement via Orange Money ou MTN Mobile Money</li>
-        <li>2️⃣ Faites une capture d’écran du paiement</li>
-        <li>3️⃣ Cliquez sur le bouton WhatsApp ci-dessous</li>
-        <li>4️⃣ Envoyez la capture à l’équipe PAF Stream</li>
-        <li>5️⃣ Vous recevrez le lien privé du film</li>
-      </ul>
+      <p><strong>🎯 Comment obtenir le lien du film :</strong></p>
+      <ol style="color:var(--muted);margin-left:18px;margin-bottom:20px">
+        <li>Effectuez le paiement via Orange Money ou MTN</li>
+        <li>Faites une capture d’écran du paiement</li>
+        <li>Cliquez sur le bouton WhatsApp ci-dessous</li>
+        <li>Envoyez la capture à l’équipe PAF Stream</li>
+        <li>Vous recevrez le lien privé du film</li>
+      </ol>
 
       <div class="actions">
         <a href="tel:%23150*1*1*689325213%23" class="pay">
@@ -224,42 +212,48 @@ footer a{color:#25D366}
         </a>
 
         <a href="https://wa.me/237621721058" class="whatsapp">
-          📩 Envoyer la capture sur WhatsApp
+          💬 Envoyer la capture sur WhatsApp
         </a>
       </div>
-
     </div>
   </div>
 </section>
 
-<footer id="contact">
-  <p><strong>PAF Stream — Équipe & Assistance</strong></p>
-  <p>
-    📧 <a href="mailto:planeteafricastream@gmail.com">
-      planeteafricastream@gmail.com
-    </a>
+<section class="section contact" id="contact">
+  <h2>📞 Équipe PAF Stream</h2>
+
+  <a href="mailto:planeteafricastream@gmail.com" class="email">
+    ✉️ planeteafricastream@gmail.com
+  </a>
+
+  <a href="https://wa.me/237621721058" class="wa">
+    💬 WhatsApp PAF Stream
+  </a>
+
+  <p style="margin-top:14px;color:var(--muted)">
+    Pour plus d’aide, assistance ou information
   </p>
-  <p>
-    💬 <a href="https://wa.me/237621721058"
-    </a>
-  </p>
-  <p>Besoin d’aide ? Contactez l’assistance PAF Stream</p>
+</section>
+
+<footer>
+  © 2025 PAF Stream — Tous droits réservés
 </footer>
 
 <script>
-const btn=document.getElementById("menuBtn");
-const nav=document.getElementById("nav");
-const overlay=document.getElementById("overlay");
+const btn=document.getElementById('menuBtn');
+const nav=document.getElementById('nav');
+const overlay=document.getElementById('overlay');
 
-function toggle(){
-  btn.classList.toggle("active");
-  nav.classList.toggle("open");
-  overlay.classList.toggle("show");
-}
+btn.onclick=()=>{
+  nav.classList.toggle('open');
+  overlay.classList.toggle('show');
+};
 
-btn.addEventListener("click",toggle);
-overlay.addEventListener("click",toggle);
+overlay.onclick=()=>{
+  nav.classList.remove('open');
+  overlay.classList.remove('show');
+};
 </script>
 
 </body>
-</html>
+  </html>
