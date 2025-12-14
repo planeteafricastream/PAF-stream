@@ -3,56 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connexion - PAF Stream</title>
+  <title>Connexion — PAF Stream</title>
+
   <style>
-    body {
-      background-color: #0b0b0b;
-      font-family: Arial, sans-serif;
-      color: #fff;
+    body{
+      background:
+        linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.6)),
+        url("genesis.jpg") center/cover no-repeat;
+      font-family:Arial,Helvetica,sans-serif;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
     }
-    .container {
-      max-width: 500px;
-      margin: 50px auto;
-      padding: 30px;
-      background-color: rgba(0, 0, 0, 0.8);
-      border-radius: 8px;
+
+    .login-box{
+      background:rgba(0,0,0,.8);
+      padding:40px;
+      border-radius:8px;
+      width:100%;
+      max-width:420px;
+      animation: slideUp .8s ease;
     }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
+
+    @keyframes slideUp{
+      from{transform:translateY(30px);opacity:0}
+      to{transform:translateY(0);opacity:1}
     }
-    .form-input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      background-color: #222;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
+
+    h2{
+      text-align:center;
+      margin-bottom:25px;
     }
-    .btn-submit {
-      background-color: #e50914;
-      color: #fff;
-      font-weight: bold;
-      padding: 12px 30px;
-      border-radius: 6px;
-      width: 100%;
-      border: none;
-      cursor: pointer;
+
+    input{
+      width:100%;
+      padding:14px;
+      margin-bottom:15px;
+      border:none;
+      border-radius:4px;
+      background:#222;
+      color:#fff;
+      font-size:15px;
     }
-    .btn-submit:hover {
-      background-color: #c20811;
+
+    input::placeholder{color:#aaa}
+
+    button{
+      width:100%;
+      padding:14px;
+      background:#e50914;
+      color:#fff;
+      border:none;
+      border-radius:4px;
+      font-weight:bold;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    button:hover{
+      background:#c20811;
+    }
+
+    .note{
+      margin-top:15px;
+      text-align:center;
+      font-size:.85rem;
+      color:#aaa;
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h2>Connexion à PAF Stream</h2>
-    <form>
-      <input type="email" class="form-input" placeholder="Email" required>
-      <input type="password" class="form-input" placeholder="Mot de passe" required>
-      <button type="submit" class="btn-submit">Se connecter</button>
-    </form>
+
+<div class="login-box">
+  <h2>Connexion à PAF Stream</h2>
+
+  <form>
+    <input type="email" placeholder="Adresse e-mail" required>
+    <input type="password" placeholder="Mot de passe" required>
+    <input type="password" placeholder="Confirmer le mot de passe" required>
+
+    <button type="submit">Se connecter</button>
+  </form>
+
+  <div class="note">
+    Accédez aux films et clips africains en toute simplicité
   </div>
+</div>
+
 </body>
 </html>
