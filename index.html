@@ -149,5 +149,34 @@
   © 2025 PAF Stream — Plateforme africaine de streaming
 </footer>
 
+<!-- 🔐 FIREBASE : REDIRECTION INTELLIGENTE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } 
+from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBwABBsB1Sn1LU1CjCQpadHEz6tnebVLVY",
+  authDomain: "paf-stream-web.firebaseapp.com",
+  projectId: "paf-stream-web",
+  storageBucket: "paf-stream-web.appspot.com",
+  messagingSenderId: "368490377612",
+  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+/*
+  ✔ Connecté  → mur.html
+  ✔ Non connecté → reste sur cette page
+*/
+onAuthStateChanged(auth, user => {
+  if (user) {
+    window.location.replace("mur.html");
+  }
+});
+</script>
+
 </body>
 </html>
