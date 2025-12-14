@@ -1,166 +1,193 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="google-site-verification" content="2dBuDlrRkyysE616onzq4OXnzwg2YR4G_6rRzQfGYz4" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PAF Stream — Votre film, votre histoire, votre Afrique</title>
+<!DOCTYPE html>  <html lang="fr">    <head>    
+  <meta charset="UTF-8">    <!-- ✅ Google Search Console -->    <meta name="google-site-verification" content="2dBuDlrRkyysE616onzq4OXnzwg2YR4G_6rRzQfGYz4" />    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+  <title>PAF Stream — Votre film, votre histoire, votre Afrique</title>    <style>    
+    :root{    
+      --bg:#0b0b0b;    
+      --card:#141414;    
+      --text:#ffffff;    
+      --muted:#b3b3b3;    
+      --accent:#e50914;    
+    }    *{margin:0;padding:0;box-sizing:border-box}    
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}    
+a{text-decoration:none;color:inherit}    
 
-  <style>
-    :root{
-      --bg:#0b0b0b;
-      --card:#141414;
-      --text:#ffffff;
-      --muted:#b3b3b3;
-      --accent:#e50914;
-    }
+header{    
+  position:fixed;top:0;left:0;width:100%;    
+  display:flex;align-items:center;justify-content:space-between;    
+  padding:14px 20px;background:rgba(0,0,0,.75);    
+  z-index:1000    
+}    
+.brand img{height:50px}    
 
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
-    a{text-decoration:none;color:inherit}
+.menu-btn{width:28px;cursor:pointer}    
+.menu-btn span{    
+  display:block;height:3px;background:#fff;    
+  margin:5px 0;border-radius:2px;transition:.3s    
+}    
+.menu-btn.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}    
+.menu-btn.active span:nth-child(2){opacity:0}    
+.menu-btn.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}    
 
-    header{
-      position:fixed;top:0;left:0;width:100%;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 20px;background:rgba(0,0,0,.75);
-      z-index:1000
-    }
-    .brand img{height:50px}
+nav{    
+  position:fixed;top:0;right:-260px;width:260px;height:100%;    
+  background:#000;padding:80px 20px;transition:.35s    
+}    
+nav.open{right:0}    
+nav a{display:block;padding:14px 0;color:#fff}    
 
-    .menu-btn{width:28px;cursor:pointer}
-    .menu-btn span{
-      display:block;height:3px;background:#fff;
-      margin:5px 0;border-radius:2px;transition:.3s
-    }
-    .menu-btn.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-    .menu-btn.active span:nth-child(2){opacity:0}
-    .menu-btn.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
+.overlay{    
+  position:fixed;top:0;left:0;width:100%;height:100%;    
+  background:rgba(0,0,0,.6);display:none    
+}    
+.overlay.show{display:block}    
 
-    nav{
-      position:fixed;top:0;right:-260px;width:260px;height:100%;
-      background:#000;padding:80px 20px;transition:.35s
-    }
-    nav.open{right:0}
-    nav a{display:block;padding:14px 0;color:#fff}
+.hero{    
+  min-height:100vh;    
+  background:linear-gradient(to top,#000 15%,rgba(0,0,0,.4)),    
+  url('genesis.jpg') center/cover no-repeat;    
+  display:flex;align-items:center;justify-content:center;    
+  text-align:center;padding:120px 20px 40px    
+}    
+.hero h1{font-size:2.4rem;margin-bottom:10px}    
+.hero p{color:var(--muted);max-width:640px;margin:0 auto 22px}    
 
-    .overlay{
-      position:fixed;top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,.6);display:none
-    }
-    .overlay.show{display:block}
+.btn{    
+  display:inline-block;background:var(--accent);    
+  padding:12px 24px;border-radius:4px;font-weight:bold    
+}    
 
-    .hero{
-      min-height:100vh;
-      background:linear-gradient(to top,#000 15%,rgba(0,0,0,.4)),
-      url('genesis.jpg') center/cover no-repeat;
-      display:flex;align-items:center;justify-content:center;
-      text-align:center;padding:120px 20px 40px
-    }
-    .hero h1{font-size:2.4rem;margin-bottom:10px}
-    .hero p{color:var(--muted);max-width:640px;margin:0 auto 22px}
+.search-box{    
+  padding:40px 20px;text-align:center    
+}    
+.search-box input{    
+  width:100%;max-width:420px;    
+  padding:12px;border-radius:6px;border:none;    
+  outline:none;font-size:15px    
+}    
 
-    .btn{
-      display:inline-block;background:var(--accent);
-      padding:12px 24px;border-radius:4px;font-weight:bold
-    }
+.section{padding:50px 20px}    
+.film-card{    
+  max-width:950px;margin:0 auto;    
+  display:flex;flex-wrap:wrap;    
+  background:var(--card);border-radius:10px;    
+  overflow:hidden    
+}    
+.film-card img{    
+  width:100%;max-width:360px;object-fit:cover    
+}    
+.film-info{padding:22px;flex:1}    
+.film-info h2{margin-bottom:10px}    
+.film-info p{color:var(--muted);line-height:1.6}    
 
-    .search-box{padding:40px 20px;text-align:center}
-    .search-box input{
-      width:100%;max-width:420px;
-      padding:12px;border-radius:6px;border:none;
-      outline:none;font-size:15px
-    }
+.badge{    
+  display:inline-block;background:#222;    
+  padding:6px 10px;border-radius:4px;    
+  font-size:.8rem;margin-bottom:10px    
+}    
 
-    .section{padding:50px 20px}
+.actions{margin-top:20px}    
+.actions a{    
+  display:inline-block;margin:6px 6px 0 0;    
+  padding:12px 18px;border-radius:4px;    
+  background:#222;font-size:.9rem    
+}    
+.actions a.pay{background:var(--accent)}    
+.actions a.whatsapp{background:#25D366;color:#000}    
 
-    .film-card{
-      max-width:950px;margin:0 auto;
-      display:flex;flex-wrap:wrap;
-      background:var(--card);border-radius:10px;
-      overflow:hidden
-    }
-    .film-card img{width:100%;max-width:360px;object-fit:cover}
-    .film-info{padding:22px;flex:1}
+footer{    
+  text-align:center;padding:30px;    
+  color:#777;font-size:.85rem    
+}
+</style>  </head>  <body>  <header>
 
-    .badge{
-      display:inline-block;background:#222;
-      padding:6px 10px;border-radius:4px;
-      font-size:.8rem;margin-bottom:10px
-    }
+  <div class="brand"><img src="logo.png" alt="PAF Stream"></div>    
+  <div class="menu-btn" id="menuBtn">    
+    <span></span><span></span><span></span>    
+  </div>    
+</header>  <nav id="nav">    
+  <a href="#">Accueil</a>    
+  <a href="#">Catalogue</a>    
+  <a href="#about">À propos</a>    
+  <a href="#contact">Contact</a>    
+</nav>  <div class="overlay" id="overlay"></div>  <section class="hero">    
+  <div>    
+    <h1>Bienvenue sur PAF Stream</h1>    
+    <p><strong>Vos films, votre histoire, votre Afrique.</strong><br>    
+    La plateforme qui valorise le cinéma africain.</p>    
+    <a href="#genesis" class="btn">Découvrir l’avant-première exclusive du film Genesis ici</a>    
+  </div>    
+</section>  <section class="search-box">    
+  <input type="text" placeholder="🔍 Rechercher un film, un titre…">    
+</section>  <section class="section" id="genesis">    
+  <div class="film-card">    
+    <img src="genesis.jpg" alt="Genesis">    
+    <div class="film-info">    
+      <span class="badge">🎬 Avant-première exclusive premium</span>    
+      <h2>GENESIS</h2>    
+      <p>    
+        Encourager l'équipe de Planète Africa en participant à l’avant-première exclusive du film <strong>Genesis</strong>,    
+        disponible uniquement sur PAF Stream.    
+      </p>  <div class="actions">    
+    <a href="tel:%23150*1*1*689325213%23" class="pay">    
+      Payer via Orange Money (1000 FCFA)    
+    </a>    <a href="https://wa.me/237621721058" class="whatsapp">    
+  Envoyer la capture sur WhatsApp    
+</a>
 
-    /* 🔽 Section téléchargement */
-    .download{
-      background:#000;
-      text-align:center;
-      padding:50px 20px
-    }
-    .download p{color:var(--muted);margin-bottom:16px}
-    .download a{
-      display:inline-block;
-      background:var(--accent);
-      padding:14px 28px;
-      border-radius:6px;
-      font-weight:bold;
-      font-size:1rem
-    }
+  </div>    
+</div>    </div>    
+</section>  <section class="section" id="contact">    
+  <h2 style="text-align:center;margin-bottom:12px">    
+    Pour plus d’informations    
+  </h2>    
+  <p style="text-align:center;color:var(--muted);margin-bottom:20px">    
+    Contactez l’équipe <strong>PAF STREAM</strong>    
+  </p>    
+  <div style="text-align:center">    
+    <a href="https://wa.me/237621721058"    
+       style="display:inline-block;background:#25D366;color:#000;    
+              padding:12px 22px;border-radius:4px;font-weight:bold;margin:6px">    
+      💬 WhatsApp    
+    </a>    
+    <a href="mailto:planeteafricastream@gmail.com"    
+       style="display:inline-block;background:#222;    
+              padding:12px 22px;border-radius:4px;font-weight:bold;margin:6px">    
+      ✉️ Email    
+    </a>    
+  </div>    
+</section>  
 
-    footer{
-      text-align:center;padding:30px;
-      color:#777;font-size:.85rem
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <div class="brand"><img src="logo.png" alt="PAF Stream"></div>
-  <div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
-</header>
-
-<nav id="nav">
-  <a href="#">Accueil</a>
-  <a href="#">Catalogue</a>
-  <a href="#contact">Contact</a>
-</nav>
-
-<div class="overlay" id="overlay"></div>
-
-<section class="hero">
-  <div>
-    <h1>Bienvenue sur PAF Stream</h1>
-    <p><strong>Vos films, votre histoire, votre Afrique.</strong></p>
-    <a href="#genesis" class="btn">Découvrir l’avant-première</a>
-  </div>
-</section>
-
-<!-- 🔽 BOUTON TÉLÉCHARGEMENT -->
-<section class="download">
-  <h2>📱 Télécharger l’application PAF Stream</h2>
-  <p>Disponible sur Android (APK)</p>
-  <a href="https://github.com/planeteafricastream/PAF-Stream/releases/download/v1.0.0/app-release.apk" target="_blank">
-    ⬇️ Télécharger l’application
+<!-- ✅ BOUTON TÉLÉCHARGEMENT AJOUTÉ ICI -->
+<div style="text-align:center;padding:20px">
+  <a href="https://github.com/planeteafricastream/PAF-Stream/releases/download/v1.0.0/app-release.apk"
+     style="display:inline-block;background:#e50914;color:#fff;
+            padding:14px 26px;border-radius:6px;font-weight:bold">
+    ⬇️ Télécharger l’application PAF Stream
   </a>
-</section>
+</div>
 
-<footer>
-  © 2025 PAF Stream — Plateforme africaine de streaming
-</footer>
+<footer>    
+  © 2025 PAF Stream — Plateforme africaine de streaming    
+</footer>  
 
-<script>
-  const btn = document.getElementById('menuBtn');
-  const nav = document.getElementById('nav');
-  const overlay = document.getElementById('overlay');
+<script>    
+  const btn = document.getElementById('menuBtn');    
+  const nav = document.getElementById('nav');    
+  const overlay = document.getElementById('overlay');    function toggleMenu(){
+btn.classList.toggle('active');
+nav.classList.toggle('open');
+overlay.classList.toggle('show');
+}
 
-  function toggleMenu(){
-    btn.classList.toggle('active');
-    nav.classList.toggle('open');
-    overlay.classList.toggle('show');
-  }
+btn.addEventListener('click', toggleMenu);
+overlay.addEventListener('click', toggleMenu);
 
-  btn.addEventListener('click', toggleMenu);
-  overlay.addEventListener('click', toggleMenu);
-</script>
-
-</body>
+document.querySelectorAll('nav a').forEach(link => {
+link.addEventListener('click', () => {
+btn.classList.remove('active');
+nav.classList.remove('open');
+overlay.classList.remove('show');
+});
+});
+</script>  </body>
 </html>
