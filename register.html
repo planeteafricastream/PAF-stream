@@ -1,139 +1,128 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Inscription • PAF Stream</title>
+  <meta charset="UTF-8">
+  <title>Inscription • PAF Stream</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg,#000,#1a1a1a);
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-.card {
-  background:#111;
-  width:360px;
-  padding:30px;
-  border-radius:14px;
-  text-align:center;
-}
-.logo {
-  width:120px;
-  margin-bottom:15px;
-}
-input {
-  width:100%;
-  padding:12px;
-  margin-bottom:12px;
-  border-radius:8px;
-  border:none;
-}
-button {
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:8px;
-  font-size:16px;
-  cursor:pointer;
-}
-.main {
-  background:#e50914;
-  color:white;
-}
-.google {
-  background:white;
-  color:black;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-}
-.google img { width:20px; }
-.link {
-  margin-top:15px;
-  font-size:14px;
-}
-a {
-  color:#e50914;
-  text-decoration:none;
-}
-</style>
+  <!-- IMPORTANT POUR MOBILE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #000, #1a1a1a);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .card {
+      background: #111;
+      width: 90%;
+      max-width: 420px;
+      padding: 30px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+    }
+
+    .logo {
+      width: 140px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 5px;
+    }
+
+    p {
+      color: #aaa;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .main-btn {
+      background: #e50914;
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .divider {
+      margin: 15px 0;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .google-btn {
+      background: white;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .google-btn img {
+      width: 20px;
+    }
+
+    .link {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    a {
+      color: #e50914;
+      text-decoration: none;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="card">
-  <!-- LOGO PAF STREAM -->
-  <img src="logo.png" class="logo" alt="PAF Stream">
+  <div class="card">
+    <img src="logo.png" class="logo" alt="PAF Stream">
 
-  <h2>Inscription</h2>
-  <p>Crée ton compte PAF Stream</p>
+    <h2>Inscription</h2>
+    <p>Crée ton compte PAF Stream</p>
 
-  <!-- FORM -->
-  <input type="email" id="email" placeholder="Adresse email">
-  <input type="password" id="password" placeholder="Mot de passe">
+    <input type="email" placeholder="Adresse email">
+    <input type="password" placeholder="Mot de passe">
 
-  <button class="main" onclick="register()">Créer un compte</button>
+    <button class="main-btn">Créer un compte</button>
 
-  <p>OU</p>
+    <div class="divider">OU</div>
 
-  <!-- GOOGLE -->
-  <button class="google" onclick="registerGoogle()">
-    <img src="https://www.svgrepo.com/show/475656/google-color.svg">
-    S’inscrire avec Google
-  </button>
+    <button class="google-btn">
+      <img src="https://www.svgrepo.com/show/475656/google-color.svg">
+      S’inscrire avec Google
+    </button>
 
-  <div class="link">
-    Déjà un compte ? <a href="login.html">Connexion</a>
+    <div class="link">
+      Déjà un compte ? <a href="login.html">Connexion</a>
+    </div>
   </div>
-</div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup
-} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBwABBsB1Sn1LU1CjCQpadHEz6tnebVLVY",
-  authDomain: "paf-stream-web.firebaseapp.com",
-  projectId: "paf-stream-web",
-  storageBucket: "paf-stream-web.appspot.com",
-  messagingSenderId: "368490377612",
-  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-
-/* INSCRIPTION EMAIL */
-window.register = () => {
-  createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then(() => {
-      alert("Compte créé avec succès 🎉");
-      // plus tard : redirection dashboard
-    })
-    .catch(err => alert(err.message));
-};
-
-/* INSCRIPTION GOOGLE */
-window.registerGoogle = () => {
-  signInWithPopup(auth, provider)
-    .then(() => {
-      alert("Inscription Google réussie 🎉");
-    })
-    .catch(err => alert(err.message));
-};
-</script>
 
 </body>
 </html>
