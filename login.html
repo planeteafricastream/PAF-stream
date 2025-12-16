@@ -12,6 +12,7 @@
   --text:#ffffff;
   --muted:#b3b3b3;
   --accent:#e50914;
+  --error:#ff4d4d;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -45,7 +46,7 @@ p{color:var(--muted);margin-bottom:24px}
 input{
   width:100%;
   padding:14px;
-  margin-bottom:14px;
+  margin-bottom:12px;
   border:none;
   border-radius:6px;
   font-size:1rem;
@@ -81,6 +82,13 @@ button:hover{opacity:.9}
 
 .google-btn img{width:20px}
 
+.error{
+  color:var(--error);
+  font-size:.9rem;
+  margin-bottom:14px;
+  display:none;
+}
+
 .bottom{
   margin-top:18px;
   font-size:.9rem;
@@ -104,30 +112,19 @@ button:hover{opacity:.9}
   <h1>Connexion</h1>
   <p>Accédez à PAF Stream</p>
 
-  <!-- EMAIL -->
   <input type="email" id="email" placeholder="Adresse email">
   <input type="password" id="password" placeholder="Mot de passe">
+
+  <div id="error" class="error"></div>
+
   <button onclick="login()">Se connecter</button>
 
   <div class="or">OU</div>
 
-  <!-- GOOGLE -->
   <button class="google-btn" onclick="loginGoogle()">
     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
     Continuer avec Google
   </button>
-
-  <div class="or">OU</div>
-
-  <!-- 📱 TÉLÉPHONE (AJOUT) -->
-  <input type="tel" id="phone" placeholder="Numéro de téléphone (+237...)">
-  <button onclick="sendCode()">Recevoir le code SMS</button>
-
-  <input type="text" id="smsCode" placeholder="Code SMS reçu">
-  <button onclick="verifyCode()">Valider le code</button>
-
-  <!-- reCAPTCHA -->
-  <div id="recaptcha-container"></div>
 
   <div class="bottom">
     Pas encore de compte ?
@@ -142,9 +139,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup,
-  RecaptchaVerifier,
-  signInWithPhoneNumber
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -160,46 +155,40 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+const errorBox = document.getElementById("error");
+
 /* EMAIL LOGIN */
 window.login = () => {
-  const email = email.value;
-  const password = password.value;
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  errorBox.style.display = "none";
+
+  if (!email || !password) {
+    showError("Veuillez remplir tous les champs");
+    return;
+  }
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => location.replace("mur.html"))
-    .catch(e => alert(e.message));
+    .then(() => {
+      window.location.replace("mur.html");
+    })
+    .catch(e => showError(e.message));
 };
 
 /* GOOGLE LOGIN */
 window.loginGoogle = () => {
   signInWithPopup(auth, provider)
-    .then(() => location.replace("mur.html"))
-    .catch(e => alert(e.message));
-};
-
-/* 📱 TÉLÉPHONE LOGIN */
-window.recaptchaVerifier = new RecaptchaVerifier(
-  auth,
-  "recaptcha-container",
-  { size: "invisible" }
-);
-
-window.sendCode = () => {
-  const phoneNumber = document.getElementById("phone").value;
-  signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
-    .then(result => {
-      window.confirmationResult = result;
-      alert("Code SMS envoyé");
+    .then(() => {
+      window.location.replace("mur.html");
     })
-    .catch(e => alert(e.message));
+    .catch(e => showError(e.message));
 };
 
-window.verifyCode = () => {
-  const code = document.getElementById("smsCode").value;
-  window.confirmationResult.confirm(code)
-    .then(() => location.replace("mur.html"))
-    .catch(() => alert("Code incorrect"));
-};
+function showError(message){
+  errorBox.innerText = message;
+  errorBox.style.display = "block";
+}
 </script>
 
 </body>
