@@ -12,6 +12,7 @@
   --text:#ffffff;
   --muted:#b3b3b3;
   --accent:#e50914;
+  --error:#ff4d4d;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -35,27 +36,17 @@ body{
   text-align:center;
 }
 
-.logo{
-  margin-bottom:20px;
-}
+.logo{margin-bottom:20px}
+.logo img{height:50px}
 
-.logo img{
-  height:50px;
-}
+h1{margin-bottom:6px}
 
-h1{
-  margin-bottom:6px;
-}
-
-p{
-  color:var(--muted);
-  margin-bottom:24px;
-}
+p{color:var(--muted);margin-bottom:24px}
 
 input{
   width:100%;
   padding:14px;
-  margin-bottom:14px;
+  margin-bottom:12px;
   border:none;
   border-radius:6px;
   font-size:1rem;
@@ -89,8 +80,13 @@ button:hover{opacity:.9}
   gap:10px;
 }
 
-.google-btn img{
-  width:20px;
+.google-btn img{width:20px}
+
+.error{
+  color:var(--error);
+  font-size:.9rem;
+  margin-bottom:14px;
+  display:none;
 }
 
 .bottom{
@@ -116,20 +112,16 @@ button:hover{opacity:.9}
   <h1>Inscription</h1>
   <p>Crée ton compte PAF Stream</p>
 
-  <!-- EMAIL -->
   <input type="email" id="email" placeholder="Adresse email">
-
-  <!-- PASSWORD -->
   <input type="password" id="password" placeholder="Mot de passe (6 caractères minimum)">
-
-  <!-- CONFIRM PASSWORD -->
   <input type="password" id="confirmPassword" placeholder="Confirmer le mot de passe">
+
+  <div id="error" class="error"></div>
 
   <button onclick="register()">Créer un compte</button>
 
   <div class="or">OU</div>
 
-  <!-- GOOGLE -->
   <button class="google-btn" onclick="registerGoogle()">
     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
     S’inscrire avec Google
@@ -141,14 +133,14 @@ button:hover{opacity:.9}
   </div>
 </div>
 
-<!-- FIREBASE -->
+<!-- 🔐 FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { 
-  getAuth, 
-  createUserWithEmailAndPassword, 
-  GoogleAuthProvider, 
-  signInWithPopup 
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -157,27 +149,35 @@ const firebaseConfig = {
   projectId: "paf-stream-web",
   storageBucket: "paf-stream-web.firebasestorage.app",
   messagingSenderId: "368490377612",
-  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9",
-  measurementId: "G-9TJP9ML7ZG"
+  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+const errorBox = document.getElementById("error");
+
 /* EMAIL REGISTER */
-window.register = function(){
+window.register = () => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
+  const confirm = document.getElementById("confirmPassword").value;
 
-  if(password.length < 6){
-    alert("Le mot de passe doit contenir au moins 6 caractères");
+  errorBox.style.display = "none";
+
+  if (!email || !password || !confirm) {
+    showError("Veuillez remplir tous les champs");
     return;
   }
 
-  if(password !== confirmPassword){
-    alert("Les mots de passe ne correspondent pas");
+  if (password.length < 6) {
+    showError("Le mot de passe doit contenir au moins 6 caractères");
+    return;
+  }
+
+  if (password !== confirm) {
+    showError("Les mots de passe ne correspondent pas");
     return;
   }
 
@@ -185,16 +185,21 @@ window.register = function(){
     .then(() => {
       window.location.replace("mur.html");
     })
-    .catch(err => alert(err.message));
-}
+    .catch(e => showError(e.message));
+};
 
 /* GOOGLE REGISTER */
-window.registerGoogle = function(){
+window.registerGoogle = () => {
   signInWithPopup(auth, provider)
     .then(() => {
       window.location.replace("mur.html");
     })
-    .catch(err => alert(err.message));
+    .catch(e => showError(e.message));
+};
+
+function showError(message){
+  errorBox.innerText = message;
+  errorBox.style.display = "block";
 }
 </script>
 
