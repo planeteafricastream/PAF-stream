@@ -220,7 +220,7 @@ window.resetPassword = function(){
   sendPasswordResetEmail(auth, email.value)
     .then(() => {
       showSuccess(
-        "📧 Email envoyé avec succès. Vérifiez aussi le dossier Spam."
+        "📧 Message de réinitialisation envoyé avec succès dans votre boîte email. Vérifiez aussi le dossier Spam."
       );
     })
     .catch(err => showError(err.message));
