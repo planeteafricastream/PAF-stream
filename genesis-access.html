@@ -1,248 +1,235 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>GENESIS — Accès sécurisé | PAF Stream</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>GENESIS — Accès sécurisé | PAF Stream</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    :root{
-      --bg:#0b0b0b;
-      --card:#141414;
-      --accent:#e50914;
-      --muted:#b3b3b3;
-    }
+<style>
+:root{
+  --bg:#0b0b0b;
+  --card:#141414;
+  --accent:#e50914;
+  --muted:#b3b3b3;
+}
 
-    *{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box}
 
-    body{
-      font-family:Arial, Helvetica, sans-serif;
-      background:var(--bg);
-      color:#fff;
-      min-height:100vh;
-    }
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:#fff;
+  min-height:100vh;
+}
 
-    /* HEADER PRIVÉ */
-    header{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      background:#000;
-      display:flex;
-      justify-content:flex-start;
-      align-items:center;
-      padding:14px 20px;
-      z-index:1000;
-      box-shadow:0 2px 10px rgba(0,0,0,.6);
-    }
+/* HEADER */
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background:#000;
+  display:flex;
+  align-items:center;
+  padding:14px 20px;
+  z-index:1000;
+  box-shadow:0 2px 10px rgba(0,0,0,.6);
+}
+header img{height:52px}
 
-    header img{height:52px}
+/* ACCÈS */
+.center{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
 
-    /* ACCÈS */
-    .center{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-    }
+.box{
+  background:var(--card);
+  padding:32px;
+  border-radius:14px;
+  max-width:440px;
+  width:100%;
+  text-align:center;
+  box-shadow:0 0 30px rgba(0,0,0,.7);
+}
 
-    .box{
-      background:var(--card);
-      padding:30px;
-      border-radius:14px;
-      max-width:420px;
-      width:100%;
-      text-align:center;
-      box-shadow:0 0 30px rgba(0,0,0,.7);
-    }
+.box h1{margin-bottom:8px}
+.box p{color:var(--muted);font-size:.95rem}
 
-    .box h1{margin-bottom:10px}
-    .box p{color:var(--muted);font-size:.95rem}
+input,button{
+  width:100%;
+  padding:13px;
+  border-radius:6px;
+  border:none;
+  margin-top:16px;
+  font-size:16px;
+}
 
-    input,button{
-      width:100%;
-      padding:12px;
-      border-radius:6px;
-      border:none;
-      margin-top:18px;
-      font-size:16px;
-    }
+button{
+  background:var(--accent);
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-    button{
-      background:var(--accent);
-      color:#fff;
-      font-weight:bold;
-      cursor:pointer;
-    }
+.error{
+  color:var(--accent);
+  margin-top:12px;
+  display:none;
+}
 
-    .error{
-      color:var(--accent);
-      margin-top:12px;
-      display:none;
-    }
+/* 🔹 BLOC PRO CONSIGNES */
+.process{
+  margin-top:26px;
+  background:#111;
+  border:1px solid #222;
+  border-radius:12px;
+  padding:18px;
+  text-align:left;
+  font-size:.92rem;
+}
 
-    /* CONTENU FILM */
-    .content{
-      display:none;
-      max-width:1100px;
-      margin:auto;
-      padding:100px 20px 30px;
-    }
+.process h3{
+  color:var(--accent);
+  margin-bottom:12px;
+  text-align:center;
+}
 
-    .thankyou{
-      background:#111;
-      border:1px solid #222;
-      border-radius:12px;
-      padding:20px;
-      margin-bottom:25px;
-      text-align:center;
-      box-shadow:0 0 20px rgba(0,0,0,.6);
-    }
+.process ol{
+  padding-left:18px;
+  color:var(--muted);
+}
 
-    .thankyou img{
-      height:60px;
-      margin-bottom:10px;
-    }
+.process li{
+  margin-bottom:8px;
+}
 
-    .thankyou h2{
-      color:var(--accent);
-      margin-bottom:8px;
-    }
+/* BOUTONS */
+.pay-btn{
+  display:block;
+  margin-top:12px;
+  padding:13px;
+  border-radius:6px;
+  font-weight:bold;
+  text-align:center;
+  text-decoration:none;
+}
 
-    .thankyou p{
-      color:var(--muted);
-      font-size:.95rem;
-      line-height:1.5;
-    }
+.orange{background:#ff7900;color:#000}
+.mtn{background:#ffcc00;color:#000}
+.whatsapp{background:#25D366;color:#000}
 
-    .warning{
-      background:#1c1c1c;
-      border-left:5px solid var(--accent);
-      padding:15px;
-      margin-bottom:25px;
-      color:var(--muted);
-      border-radius:8px;
-      font-size:.95rem;
-    }
+.notice{
+  margin-top:10px;
+  text-align:center;
+  font-size:.85rem;
+  color:#bbb;
+}
 
-    /* VIDEO */
-    .video-wrapper{
-      position:relative;
-      width:100%;
-      padding-top:56.25%;
-      background:#000;
-      border-radius:14px;
-      overflow:hidden;
-      box-shadow:0 0 35px rgba(0,0,0,.8);
-    }
+/* CONTENU FILM */
+.content{
+  display:none;
+  max-width:1100px;
+  margin:auto;
+  padding:100px 20px 30px;
+}
 
-    .video-wrapper iframe{
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      border:none;
-    }
+.video-wrapper{
+  position:relative;
+  width:100%;
+  padding-top:56.25%;
+  background:#000;
+  border-radius:14px;
+  overflow:hidden;
+}
 
-    footer{
-      margin-top:22px;
-      text-align:center;
-      font-size:.8rem;
-      color:#777;
-    }
-
-    footer a{
-      color:var(--accent);
-      text-decoration:none;
-    }
-
-    @media(max-width:768px){
-      .video-wrapper{border-radius:10px}
-    }
-  </style>
+.video-wrapper iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:none;
+}
+</style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
   <img src="logo.png" alt="PAF Stream">
 </header>
 
-<!-- ACCÈS -->
+<!-- 🔐 ZONE ACCÈS -->
 <div class="center" id="passwordBox">
   <div class="box">
     <h1>🔐 Accès sécurisé</h1>
-    <p>Entrez le mot de passe reçu après paiement pour accéder au film</p>
+    <p>Entrez le code d’accès reçu après paiement</p>
 
-    <input type="password" id="password" placeholder="Mot de passe">
+    <input type="password" id="password" placeholder="Code d’accès">
     <button onclick="checkAccess()">Accéder</button>
+    <div class="error" id="error">Code incorrect</div>
 
-    <div class="error" id="error">Mot de passe incorrect</div>
+    <!-- ✅ CONSIGNES PRO -->
+    <div class="process">
+      <h3>🎟️ Comment obtenir le code d’accès ?</h3>
+      <ol>
+        <li>Envoyez <strong>1000 FCFA</strong> via Orange Money ou MTN Mobile Money</li>
+        <li>Faites une <strong>capture d’écran</strong> ou transférez le message de confirmation</li>
+        <li>Envoyez la preuve à l’équipe <strong>PAF STREAM</strong> sur WhatsApp</li>
+      </ol>
+
+      <a class="pay-btn orange" href="tel:%23150*1*1*689325213%23">
+        🍊 Payer via Orange Money
+      </a>
+
+      <a class="pay-btn mtn" href="tel:*126*1*1*673807285#">
+        📱 Payer via MTN Mobile Money
+      </a>
+
+      <a class="pay-btn whatsapp" href="https://wa.me/237621721058" target="_blank">
+        💬 Envoyer la preuve sur WhatsApp
+      </a>
+
+      <div class="notice">
+        Le code d’accès vous sera automatiquement envoyé après vérification.
+      </div>
+    </div>
+
   </div>
 </div>
 
-<!-- CONTENU FILM -->
+<!-- 🎬 CONTENU FILM (INCHANGÉ) -->
 <div class="content" id="content">
-
-  <!-- REMERCIEMENT -->
-  <div class="thankyou">
-    <img src="logo.png" alt="PAF Stream">
-    <h2>🎉 Merci pour votre accès Premium</h2>
-    <p>
-      Votre paiement a bien été confirmé.<br>
-      Vous avez désormais un accès exclusif au film <strong>GENESIS</strong>.
-    </p>
-  </div>
-
-  <h1>🎬 GENESIS</h1>
-
-  <div class="warning">
-    ⚠️ Ce lien est strictement personnel et confidentiel.  
-    Tout partage non autorisé entraînera la désactivation immédiate de l’accès.
-  </div>
-
   <div class="video-wrapper">
     <iframe
-      src="https://www.youtube.com/embed/EPR4kNu1Osk?rel=0&modestbranding=1&playsinline=1"
+      src="https://www.youtube.com/embed/EPR4kNu1Osk?rel=0&modestbranding=1"
       allowfullscreen>
     </iframe>
   </div>
-
-  <footer>
-    <p>© PAF Stream — Soutenons le cinéma africain</p>
-    <p>
-      📩 Informations & assistance :
-      <a href="mailto:planeteafricastream@gmail.com">
-        planeteafricastream@gmail.com
-      </a>
-    </p>
-  </footer>
-
 </div>
 
 <script>
-  const PASSWORD = "GENESIS2025";
+const PASSWORD = "GENESIS2025";
 
-  function checkAccess(){
-    const input = document.getElementById("password").value;
+function checkAccess(){
+  const input = document.getElementById("password").value;
 
-    if(input === PASSWORD){
-      document.getElementById("passwordBox").style.display = "none";
-      document.getElementById("content").style.display = "block";
-      sessionStorage.setItem("paf_access","ok");
-    }else{
-      document.getElementById("error").style.display = "block";
-    }
-  }
-
-  if(sessionStorage.getItem("paf_access") === "ok"){
+  if(input === PASSWORD){
     document.getElementById("passwordBox").style.display = "none";
     document.getElementById("content").style.display = "block";
+    sessionStorage.setItem("paf_access","ok");
+  }else{
+    document.getElementById("error").style.display = "block";
   }
+}
+
+if(sessionStorage.getItem("paf_access") === "ok"){
+  document.getElementById("passwordBox").style.display = "none";
+  document.getElementById("content").style.display = "block";
+}
 </script>
 
 </body>
