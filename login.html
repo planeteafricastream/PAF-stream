@@ -12,7 +12,7 @@
   --text:#ffffff;
   --muted:#b3b3b3;
   --accent:#e50914;
-  --error:#ff4d4d;
+  --success:#4CAF50;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -46,7 +46,7 @@ p{color:var(--muted);margin-bottom:24px}
 input{
   width:100%;
   padding:14px;
-  margin-bottom:12px;
+  margin-bottom:14px;
   border:none;
   border-radius:6px;
   font-size:1rem;
@@ -82,13 +82,6 @@ button:hover{opacity:.9}
 
 .google-btn img{width:20px}
 
-.error{
-  color:var(--error);
-  font-size:.9rem;
-  margin-bottom:14px;
-  display:none;
-}
-
 .bottom{
   margin-top:18px;
   font-size:.9rem;
@@ -98,6 +91,29 @@ button:hover{opacity:.9}
   color:var(--accent);
   font-weight:bold;
   text-decoration:none;
+}
+
+.forgot{
+  margin-top:10px;
+  font-size:.9rem;
+  cursor:pointer;
+  color:var(--muted);
+}
+
+.forgot:hover{
+  text-decoration:underline;
+}
+
+#success{
+  display:none;
+  color:var(--success);
+  margin-top:12px;
+}
+
+#error{
+  display:none;
+  color:var(--accent);
+  margin-top:12px;
 }
 </style>
 </head>
@@ -115,9 +131,14 @@ button:hover{opacity:.9}
   <input type="email" id="email" placeholder="Adresse email">
   <input type="password" id="password" placeholder="Mot de passe">
 
-  <div id="error" class="error"></div>
-
   <button onclick="login()">Se connecter</button>
+
+  <div class="forgot" onclick="resetPassword()">
+    Mot de passe oublié ?
+  </div>
+
+  <p id="success"></p>
+  <p id="error"></p>
 
   <div class="or">OU</div>
 
@@ -132,14 +153,15 @@ button:hover{opacity:.9}
   </div>
 </div>
 
-<!-- 🔐 FIREBASE -->
+<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup
+import { 
+  getAuth, 
+  signInWithEmailAndPassword, 
+  GoogleAuthProvider, 
+  signInWithPopup,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -148,46 +170,60 @@ const firebaseConfig = {
   projectId: "paf-stream-web",
   storageBucket: "paf-stream-web.firebasestorage.app",
   messagingSenderId: "368490377612",
-  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9"
+  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9",
+  measurementId: "G-9TJP9ML7ZG"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-const errorBox = document.getElementById("error");
+function showSuccess(msg){
+  success.style.display = "block";
+  error.style.display = "none";
+  success.innerText = msg;
+}
+
+function showError(msg){
+  error.style.display = "block";
+  success.style.display = "none";
+  error.innerText = msg;
+}
 
 /* EMAIL LOGIN */
-window.login = () => {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+window.login = function(){
+  signInWithEmailAndPassword(
+    auth,
+    email.value,
+    password.value
+  )
+  .then(() => {
+    location.replace("mur.html");
+  })
+  .catch(err => showError(err.message));
+}
 
-  errorBox.style.display = "none";
+/* GOOGLE LOGIN */
+window.loginGoogle = function(){
+  signInWithPopup(auth, provider)
+    .then(() => location.replace("mur.html"))
+    .catch(err => showError(err.message));
+}
 
-  if (!email || !password) {
-    showError("Veuillez remplir tous les champs");
+/* MOT DE PASSE OUBLIÉ */
+window.resetPassword = function(){
+  if(!email.value){
+    showError("Veuillez entrer votre adresse email.");
     return;
   }
 
-  signInWithEmailAndPassword(auth, email, password)
+  sendPasswordResetEmail(auth, email.value)
     .then(() => {
-      window.location.replace("mur.html");
+      showSuccess(
+        "📧 Email envoyé avec succès. Vérifiez aussi le dossier Spam."
+      );
     })
-    .catch(e => showError(e.message));
-};
-
-/* GOOGLE LOGIN */
-window.loginGoogle = () => {
-  signInWithPopup(auth, provider)
-    .then(() => {
-      window.location.replace("mur.html");
-    })
-    .catch(e => showError(e.message));
-};
-
-function showError(message){
-  errorBox.innerText = message;
-  errorBox.style.display = "block";
+    .catch(err => showError(err.message));
 }
 </script>
 
