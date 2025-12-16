@@ -35,22 +35,12 @@ body{
   text-align:center;
 }
 
-.logo{
-  margin-bottom:20px;
-}
+.logo{margin-bottom:20px}
+.logo img{height:50px}
 
-.logo img{
-  height:50px;
-}
+h1{margin-bottom:6px}
 
-h1{
-  margin-bottom:6px;
-}
-
-p{
-  color:var(--muted);
-  margin-bottom:24px;
-}
+p{color:var(--muted);margin-bottom:24px}
 
 input{
   width:100%;
@@ -89,9 +79,7 @@ button:hover{opacity:.9}
   gap:10px;
 }
 
-.google-btn img{
-  width:20px;
-}
+.google-btn img{width:20px}
 
 .bottom{
   margin-top:18px;
@@ -116,17 +104,30 @@ button:hover{opacity:.9}
   <h1>Connexion</h1>
   <p>Accédez à PAF Stream</p>
 
+  <!-- EMAIL -->
   <input type="email" id="email" placeholder="Adresse email">
   <input type="password" id="password" placeholder="Mot de passe">
-
   <button onclick="login()">Se connecter</button>
 
   <div class="or">OU</div>
 
+  <!-- GOOGLE -->
   <button class="google-btn" onclick="loginGoogle()">
     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
     Continuer avec Google
   </button>
+
+  <div class="or">OU</div>
+
+  <!-- 📱 TÉLÉPHONE (AJOUT) -->
+  <input type="tel" id="phone" placeholder="Numéro de téléphone (+237...)">
+  <button onclick="sendCode()">Recevoir le code SMS</button>
+
+  <input type="text" id="smsCode" placeholder="Code SMS reçu">
+  <button onclick="verifyCode()">Valider le code</button>
+
+  <!-- reCAPTCHA -->
+  <div id="recaptcha-container"></div>
 
   <div class="bottom">
     Pas encore de compte ?
@@ -134,11 +135,17 @@ button:hover{opacity:.9}
   </div>
 </div>
 
-<!-- FIREBASE -->
+<!-- 🔐 FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBwABBsB1Sn1LU1CjCQpadHEz6tnebVLVY",
@@ -146,8 +153,7 @@ const firebaseConfig = {
   projectId: "paf-stream-web",
   storageBucket: "paf-stream-web.firebasestorage.app",
   messagingSenderId: "368490377612",
-  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9",
-  measurementId: "G-9TJP9ML7ZG"
+  appId: "1:368490377612:web:e6ebabae0a0453c0f326a9"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -155,25 +161,45 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 /* EMAIL LOGIN */
-window.login = function(){
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+window.login = () => {
+  const email = email.value;
+  const password = password.value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      window.location.replace("mur.html");
-    })
-    .catch(err => alert(err.message));
-}
+    .then(() => location.replace("mur.html"))
+    .catch(e => alert(e.message));
+};
 
 /* GOOGLE LOGIN */
-window.loginGoogle = function(){
+window.loginGoogle = () => {
   signInWithPopup(auth, provider)
-    .then(() => {
-      window.location.replace("mur.html");
+    .then(() => location.replace("mur.html"))
+    .catch(e => alert(e.message));
+};
+
+/* 📱 TÉLÉPHONE LOGIN */
+window.recaptchaVerifier = new RecaptchaVerifier(
+  auth,
+  "recaptcha-container",
+  { size: "invisible" }
+);
+
+window.sendCode = () => {
+  const phoneNumber = document.getElementById("phone").value;
+  signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+    .then(result => {
+      window.confirmationResult = result;
+      alert("Code SMS envoyé");
     })
-    .catch(err => alert(err.message));
-}
+    .catch(e => alert(e.message));
+};
+
+window.verifyCode = () => {
+  const code = document.getElementById("smsCode").value;
+  window.confirmationResult.confirm(code)
+    .then(() => location.replace("mur.html"))
+    .catch(() => alert("Code incorrect"));
+};
 </script>
 
 </body>
