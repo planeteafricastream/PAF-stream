@@ -116,13 +116,20 @@ button:hover{opacity:.9}
   <h1>Inscription</h1>
   <p>Crée ton compte PAF Stream</p>
 
+  <!-- EMAIL -->
   <input type="email" id="email" placeholder="Adresse email">
+
+  <!-- PASSWORD -->
   <input type="password" id="password" placeholder="Mot de passe (6 caractères minimum)">
+
+  <!-- CONFIRM PASSWORD -->
+  <input type="password" id="confirmPassword" placeholder="Confirmer le mot de passe">
 
   <button onclick="register()">Créer un compte</button>
 
   <div class="or">OU</div>
 
+  <!-- GOOGLE -->
   <button class="google-btn" onclick="registerGoogle()">
     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
     S’inscrire avec Google
@@ -160,11 +167,17 @@ const provider = new GoogleAuthProvider();
 
 /* EMAIL REGISTER */
 window.register = function(){
-  const email = document.getElementById("email").value;
+  const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
   if(password.length < 6){
     alert("Le mot de passe doit contenir au moins 6 caractères");
+    return;
+  }
+
+  if(password !== confirmPassword){
+    alert("Les mots de passe ne correspondent pas");
     return;
   }
 
